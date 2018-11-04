@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #676447;
+  font-size:14px;
+}
+
+.navbar-top{ 
+  height:90px;
+  padding:0;
+}
+.navbar-brand-logo{
+  background-color: #676447;
+  height:90px;
+}
+
+.navbar-brand-logo img{
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+background-color: #EBEBEA;
+height:60px;
+margin-top:30px;
+color:#212529;
+background-size: cover;
+background-position: center;
+}
+.container{
+  background-color: #EBEBEA;
+}
+
+.forum-header{
+  background-color: #B7AF6F;
+  color:#fff;
+  
+}
+.forum-level1-header, .forum-level2-header, .forum-details-header{
+  background-color: #567144;
+
+}
+.new-comment,.new-topic-button{
+  background-color: #B7AF6F;  
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  color:white;
+  padding:2px 8px;
+  margin:5px;
+}
+.forum-level2, .forum-level1, .forum-details{
+  background-color:#d1d1c9;
+}
+
+.avatar{
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  background-color: #B7AF6F; 
+  position: relative;
+  top:0%;
+  left:25%;
+  
+}
+.avatar h3{
+  position: relative;
+  padding-top:12px;
+  text-align: center;
+  color:#fff;
+}
+.user-info p{
+  font-size:0.8em;
+  margin:0;
+}
+
+.signup{
+  max-width:400px;
+  border:1px solid grey;
+}
