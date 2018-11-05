@@ -12,7 +12,7 @@ const authReducer = (state = initState, action) => {
       console.log("user Edited", action.user);
       return state;
     case "EDIT_USER_ERR":
-      console.log("edit user error", action.user);
+      console.log("edit user error", action.err);
     case "DELETE_USER":
       console.log("user deleted", action.user);
       return state;

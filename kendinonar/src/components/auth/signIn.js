@@ -26,10 +26,11 @@ class SignIn extends Component {
     const { authError } = this.props;
     return (
       <div className="container">
-        <div className="container signup">
+        <div className="row ">
+          <div className="offset-md-4 col-md-4 border">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="InputEmail1">Email adresi</label>
+              <label className="h5 mt-3"htmlFor="InputEmail1">Email Adresi</label>
               <input
                 type="email"
                 className="form-control"
@@ -40,7 +41,7 @@ class SignIn extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="InputPassword1">Şifre</label>
+              <label className="h5" htmlFor="InputPassword1">Şifre</label>
               <input
                 type="password"
                 className="form-control"
@@ -65,6 +66,7 @@ class SignIn extends Component {
               {authError ? <p> {authError}</p> : null}
             </div>
           </form>
+        </div>
         </div>
       </div>
     );

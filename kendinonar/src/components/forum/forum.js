@@ -17,7 +17,7 @@ class Forum extends Component {
           </div>
           <div className="forum-header">
             <div className="row">
-              <div className="logo col-1" />
+              <div className="col-1" />
               <div className="forum col-4">Forum</div>
               <div className="last-message col-3">Son Mesaj</div>
               <div className="topics col-2 ">Konular</div>

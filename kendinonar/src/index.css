@@ -35,12 +35,16 @@ background-position: center;
 
 .forum-header{
   background-color: #B7AF6F;
-  color:#fff;
-  
+  color:#fff;  
+}
+.logo{
+  background-size: cover;
+  width:100%;
+  margin-top:20px;
+
 }
 .forum-level1-header, .forum-level2-header, .forum-details-header{
   background-color: #567144;
-
 }
 .new-comment,.new-topic-button{
   background-color: #B7AF6F;  
@@ -61,8 +65,12 @@ background-position: center;
   background-color: #B7AF6F; 
   position: relative;
   top:0%;
-  left:25%;
-  
+  left:25%;  
+}
+.avatarTop{
+ color:#FFF; 
+ font-weight: 600;
+ 
 }
 .avatar h3{
   position: relative;
@@ -76,6 +84,7 @@ background-position: center;
 }
 
 .signup{
-  max-width:400px;
+   max-width:400px;
   border:1px solid grey;
+  margin-top:50px;
 }

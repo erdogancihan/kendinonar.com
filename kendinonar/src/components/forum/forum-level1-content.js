@@ -1,33 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../img/kendinonar-light.jpg";
+import moment from 'moment'
+
+
 
 const ForumLevel1Content = ({ subTopic }) => {
-  
-    return (
-    <div className="container">
-      <div className="row forum-level1">
-        <div className=" col-1 border ">
-          <img className="logo" src="" alt="logo" />
-        </div>
-        <div className="forum col-4 border ">
-          <Link to={"/forum/sub/"+subTopic.sub}>{subTopic.sub}</Link>
-          <p>{subTopic.description}</p>
-        </div>
-        <div className="last-message col-3 border">
-          <Link to={"/forum/details/"+subTopic.lastMessageTitle}>{subTopic.lastMessageTitle}</Link>
-          <p>
-            Gönderen <Link to="">{subTopic.lastMessageSender}</Link>{" "}
-          </p>
-          <p>
-          {subTopic.lastMessageDate}
-          </p>
-        </div>
-        <div className="topics col-2 border">
-          {subTopic.topicCount} konu var
-        </div>
-        <div className="messages col-2 border">
-          {subTopic.messageCount} Mesaj var
-        </div>
+  return (
+    <div className="row forum-level1">
+      <div className=" col-1 border p-0">
+        <img className="logo" src={Logo} alt="logo" />
+      </div>
+      <div className="forum col-4 border p-1 ">
+        <Link className=" nav-link h5 mb-0 ml-0 " to={"/forum/sub/" + subTopic.sub}>{subTopic.sub}</Link>
+        <p className="p-1">{subTopic.description}</p>
+      </div>
+      <div className="last-message col-3 p-1 border">
+        <Link className=" nav-link  text-dark mb-0 text-left p-0 " to={"/forum/details/" + subTopic.lastMessageTitle}>
+        <strong>{subTopic.lastMessageTitle}</strong>  
+        </Link>
+        <p className="mb-0 ">
+          Son Gönderen <Link to="">{subTopic.lastMessageSender}</Link>{" "}
+        </p>
+        <p className="mb-0 ">{ moment(subTopic.lastMessageDate).startOf('day').fromNow()}</p>
+      </div>
+      <div className="topics col-2 p-1 border">{subTopic.topicCount} konu var</div>
+      <div className="messages col-2 p-1 border">
+        {subTopic.messageCount} Mesaj var
       </div>
     </div>
   );

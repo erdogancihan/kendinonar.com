@@ -5,6 +5,7 @@ import {
   editTopic,
   editSubTopic
 } from "../../store/actions/forumActions";
+import {editUserMessageCount} from "../../store/actions/userActions"
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
@@ -21,17 +22,10 @@ export class AddNewMessage extends Component {
     lastMessageDate: "",
     lastMessageSender: "",
     sub: "",
-    subMessageCount: 0
+    subMessageCount: 0,
+    userMessageCount:''
   };
 
-  /*
-  handleChange = e => {
-    this.setState({
-      [e.target.id]: e.target.value      
-    });
-    console.log(this.state)
-  };
-*/
 
   updateContent = newContent => {
     this.setState({
@@ -93,13 +87,15 @@ export class AddNewMessage extends Component {
         lastMessageDate: new Date().toLocaleString(),
         lastMessageSender: userName.userName,
         id: subTopicData.id,
-        subMessageCount: subTopicData.messageCount + 1
+        subMessageCount: subTopicData.messageCount + 1,
+        userMessageCount:userName.messageCount + 1
       },
       () => {
         console.log(this.state);
         this.props.addMessage(this.state);
         this.props.editTopic(this.state);
         this.props.editSubTopic(this.state);
+        this.props.editUserMessageCount(this.state)
       }
     );
     this.props.history.goBack();
@@ -146,7 +142,8 @@ const mapDispatchToProps = dispatch => {
   return {
     addMessage: message => dispatch(addMessage(message)),
     editTopic: message => dispatch(editTopic(message)),
-    editSubTopic: message => dispatch(editSubTopic(message))
+    editSubTopic: message => dispatch(editSubTopic(message)),
+    editUserMessageCount:message=>dispatch(editUserMessageCount(message))
   };
 };
 

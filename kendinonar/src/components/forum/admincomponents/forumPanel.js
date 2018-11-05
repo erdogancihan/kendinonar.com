@@ -95,7 +95,7 @@ class ForumPanel extends Component {
             <div className="card-header" id="headingOne">
               <h5 className="mb-0">
                 <button
-                  className="btn btn-link collapsed"
+                  className="btn btn-link collapsed  m-0 "
                   key={mainTopic.id}
                   type="button"
                   data-toggle="collapse"
@@ -109,7 +109,7 @@ class ForumPanel extends Component {
                 </button>
 
                 <button
-                  className="btn btn-link float-right delete"
+                  className="btn btn-link  float-right delete"
                   id={mainTopic.id}
                   onClick={this.handleMainDelete}
                 >

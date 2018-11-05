@@ -97,6 +97,12 @@ const forumReducer = (state = initState, action) => {
     case "EDIT_MESSAGE_ERR":
       console.log("message edit error", action.err);
       return state;
+    case "DELETE_MESSAGE":
+      console.log("message deleted", action.message);
+      return state;
+    case "DELETE_MESSAGE_ERR":
+      console.log("message delete error", action.err);
+      return state;
     case "ADD_TOPIC":
       console.log("topic added", action.message);
       return state;

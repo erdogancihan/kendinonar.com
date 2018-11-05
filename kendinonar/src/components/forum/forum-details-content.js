@@ -1,9 +1,51 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from 'moment';
 
+const ForumDetailsContent = ({
+  message,
+  messageSender,
+  topic,
+  deleteMessage,
+  auth,
+  orderNumber
+}) => {
+  const handleDelete = e => {
+    e.preventDefault();
+    deleteMessage(message);
+  };
 
-const ForumDetailsContent = ({ message, messageSender, topic }) => {
-  //console.log(message)
+  const MessageActions = () => {
+    if (messageSender.id === auth.uid) {
+      return (
+        <div className="col-4">
+          <div className="row">
+          <div className="col-6">
+            <Link
+              to={"/editmessage/" + message.id}
+              className={"new-comment p-0"}
+             
+            >
+              Değiştir
+            </Link>
+          </div>
+          <div className="col-6">
+            <Link
+              to={"/forum/details/" + topic}
+              className="new-comment p-0 "
+              onClick={handleDelete}
+            >
+              Sil
+            </Link>
+          </div>
+          </div>
+        </div>
+      );
+    }else{
+      return <div className="col-4"/>
+    }
+  };
+
   return (
     <React.Fragment>
       <div className="container">
@@ -15,20 +57,11 @@ const ForumDetailsContent = ({ message, messageSender, topic }) => {
               Yeni Yorum
             </Link>
           </div>
-          <div className="col-2">
-            <Link to={"/editmessage/" + message.id} className="new-comment p-0">
-              Değiştir
-            </Link>
-          </div>
-          <div className="col-2">
-            <Link to={"/addmessage/" + topic} className="new-comment p-0">
-              Sil
-            </Link>
-          </div>
-          <div className="col-1">#1</div>
+          <MessageActions/>
+          <div className="col-1">{'#'+orderNumber}</div>
         </div>
         <div className="row forum-details">
-          <div className="logo col-3 col-lg-2 border p-1">
+          <div className="col-3 col-lg-2 border p-1">
             <div>
               <Link to="/user/:id">{message.messageSender}</Link>
               <span className="text-right"> {messageSender.privilege}</span>
@@ -39,13 +72,13 @@ const ForumDetailsContent = ({ message, messageSender, topic }) => {
               </h3>
             </div>
             <div className="user-info">
-              <p>{"Giriş tarihi: " + messageSender.signUpDate}</p>
+              <p>{"Giriş tarihi: " + moment(messageSender.signUpDate).format('MM.DD.YYYY')}</p>
               <p>{"Şehir: " + messageSender.city}</p>
               <p>{"Mesajlar: " + messageSender.messageCount}</p>
             </div>
           </div>
           <div
-            className="forum col-9 col-lg-10 border p-2 "
+            className="forum col-9 col-lg-10 border p-2  "
             dangerouslySetInnerHTML={{ __html: message.messageContent }}
           />
         </div>

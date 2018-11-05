@@ -4,9 +4,11 @@ import ForumDetailsHeader from "./forum-details-header";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { deleteMessage } from "../../store/actions/forumActions";
 
-const ForumDetails = ({ messages, topic, users }) => {
-  // console.log( messages)
+const ForumDetails = ({ messages, topic, users, deleteMessage, auth }) => {
+  
+let i=1;
   const forumDetailsContent =
     messages &&
     messages.map(message => {
@@ -22,7 +24,10 @@ const ForumDetails = ({ messages, topic, users }) => {
           key={message.id}
           message={message}
           messageSender={messageSender}
-          topic={topic} 
+          topic={topic}
+          deleteMessage={deleteMessage}
+          auth={auth}
+          orderNumber={i++}
         />
       );
     });
@@ -39,15 +44,26 @@ const mapStateToProps = (state, ownProps) => {
   return {
     topic: topic,
     messages: state.firestore.ordered.messages,
-    users: state.firestore.ordered.users
+    users: state.firestore.ordered.users,
+    auth: state.firebase.auth
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return{
+    deleteMessage:message=>dispatch(deleteMessage(message))   
+  }
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect(props => [
     { collection: "topics" },
-    { collection: "messages", orderBy: ["messageDate", "desc"], where:['topicTitle', '==', props.match.params.id] },
+    {
+      collection: "messages",
+      orderBy: ["messageDate", "desc"],
+      where: ["topicTitle", "==", props.match.params.id]
+    },
     { collection: "users" }
   ])
 )(ForumDetails);

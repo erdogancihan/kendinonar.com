@@ -4,14 +4,20 @@ import AdminLinks from "../navbar/adminLinks";
 import {connect} from 'react-redux';
 import {signOut} from '../../store/actions/authActions';
 
+
 const SignedInLinks = (props) => {
+  
   return (
     <React.Fragment>
-      <AdminLinks />
-      
+    {props.user && props.user.privilege ==='admin' ? <AdminLinks /> : null}      
+    <li className="nav-item ">
+        <a className="nav-link">
+        Hoşgeldin <span className="avatarTop">{ props.user && props.user? props.user.userName :null}  </span>         
+        </a>
+      </li>
       <li className="nav-item">
         <Link to="/" onClick={props.signOut} className="nav-link">
-          Çıkış yap
+        Çıkış yap
         </Link>
       </li>
     </React.Fragment>

@@ -31,6 +31,24 @@ export const editUser = user => {
       });
   };
 };
+//update user messageCount
+export const editUserMessageCount = user => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    firestore
+      .collection("users")
+      .doc(user.messageSenderUserId)
+      .update({
+        messageCount: user.userMessageCount
+      })
+      .then(() => {
+        dispatch({ type: "EDIT_USER", user });
+      })
+      .catch(err => {
+        dispatch({ type: "EDIT_USER_ERR", err });
+      });
+  };
+};
 
 //Adds user
 export const addUser = user => {

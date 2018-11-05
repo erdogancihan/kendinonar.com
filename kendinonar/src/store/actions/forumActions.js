@@ -200,17 +200,20 @@ export const editMessage = message => {
       });
   };
 };
-
-
-export const deleteUser = user => {
-  return (dispatch, getState) => {
-    //make Asyn Call
-    dispatch({ type: "DELETE_USER", user });
+//delete message
+export const deleteMessage = message => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    console.log('message delete', message.id)
+    firestore
+      .delete({ collection: "messages", doc: message.id })
+      .then(() => {
+        dispatch({ type: "DELETE_MESSAGE", message });
+      })
+      .catch(err => {
+        dispatch({ type: "DELETE_MESSAGE_ERR", err });
+      });
   };
 };
-export const editUser = user => {
-  return (dispatch, getState) => {
-    //make Asyn Call
-    dispatch({ type: "EDIT_USER", user });
-  };
-};
+
+

@@ -1,40 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import moment from 'moment';
+import Logo from "../../img/kendinonar-light.jpg";
+import moment from "moment";
 
 const ForumLevel2Content = ({ topic }) => {
   //console.log(message)
   return (
     <div className="container">
       <div className="row forum-level2">
-        <div className="logo col-1 border">
-          <img src="" alt="logo" />
+        <div className=" col-1 border p-0">
+          <img className="logo" src={Logo} alt="logo" />
         </div>
-        <div className="forum col-4 border">
-          <Link to={"/forum/details/" + topic.topicTitle}>
+        <div className=" forum col-4 border p-1  ">
+        <Link
+            className=" nav-link h5 mb-0 ml-0  p-1"
+            to={"/forum/details/" + topic.topicTitle}
+          >
             {topic.topicTitle}
           </Link>
-          <span>
-            {" "}
-            <Link to="">{topic.topicSender}</Link>
-          </span>
+          
+          <Link className=" p-1"  to="">{topic.topicSender}</Link>
+         
         </div>
-        <div className="last-message col-3 border">
-          <p>
-            Gönderen <Link to="">{topic.lastMessageSender}</Link>{" "}
+        <div className="last-message col-4 border">
+          <p className="p-0 mb-0">
+            Son Gönderi <Link to="">{topic.lastMessageSender}</Link>{" "}
           </p>
-          <p>
-           { 
-             moment( topic.lastMessageDate.toString()).format('LLL')}
-           
+          <p className="p-0 mb-0">
+            {moment(topic.lastMessageDate.toString()).startOf('day').fromNow()}
           </p>
         </div>
-        <div className="topics col-2 border ">
+        <div className="topics col-3 border ">
           {topic.messageCount + " yorum var"}
         </div>
-        <div className="messages col-2 border ">
-          {topic.viewCount + " gösterim var"}
-        </div>
+        
       </div>
     </div>
   );

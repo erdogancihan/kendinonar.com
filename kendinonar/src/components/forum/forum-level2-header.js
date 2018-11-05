@@ -16,8 +16,8 @@ const ForumLevel2Header = ({ topic}) => {
         <div className="col-6 offset-sm-4" />
       </div>
       <div className="row forum-level2-header">
-        <div className="level-2-title">
-          <h5 className="px-3 text-white">{topic}</h5>
+        <div className="px-3  h5">
+          <span className="text-white">{topic}</span>
         </div>
       </div>
     </div>

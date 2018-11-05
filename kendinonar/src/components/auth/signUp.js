@@ -12,7 +12,7 @@ class signUp extends Component {
     city: "",
     privilege: "acemi",
     signUpDate: "",
-    messageCount:0
+    messageCount: 0
   };
 
   //set state from form
@@ -33,7 +33,7 @@ class signUp extends Component {
         city: "",
         privilege: "user",
         signUpDate: "",
-        messageCount:0
+        messageCount: 0
       });
       this.props.history.goBack();
     } else {
@@ -42,69 +42,86 @@ class signUp extends Component {
   render() {
     return (
       <div className="container">
-        <div className="container signup">
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="InputEmail1">Email adresi</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                aria-describedby="emailHelp"
-                placeholder="Email Adresi Giriniz"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="InputPassword">Şifre</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Şifrenizi belirleyiniz"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="InputPassword1">Şifre Tekrar</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password1"
-                placeholder="Şifrenizi tekrar giriniz"
-                value={this.state.password1}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="firstName">Kullanıcı Adınız</label>
-              <input
-                type="text"
-                className="form-control"
-                id="userName"
-                aria-describedby="firstName"
-                placeholder="Adınız"
-                value={this.state.userName}
-                onChange={this.handleChange}
-              />
-            </div>
+        <div className="row">
+          <div className="offset-md-4 col-md-4 border">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label className="h6 mt-3" htmlFor="InputEmail1">
+                  Email adresi
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Email Adresi Giriniz"
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="h6 " htmlFor="InputPassword">
+                  Şifre
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Şifrenizi belirleyiniz"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="h6 " htmlFor="InputPassword1">
+                  Şifre Tekrar
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password1"
+                  placeholder="Şifrenizi tekrar giriniz"
+                  value={this.state.password1}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="h6 " htmlFor="firstName">
+                  Kullanıcı Adınız
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="userName"
+                  aria-describedby="firstName"
+                  placeholder="Adınız"
+                  value={this.state.userName}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="city">Şehir</label>
-              <input
-                type="text"
-                className="form-control"
-                id="city"
-                aria-describedby="city"
-                placeholder="Şehir"
-                value={this.state.city}
-                onChange={this.handleChange}
-              />
-            </div>
+              <div className="form-group">
+                <label className="h6 " htmlFor="city">
+                  Şehir
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  aria-describedby="city"
+                  placeholder="Şehir"
+                  value={this.state.city}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
 
-            <button className="btn btn-secondary m-3">Üye Ol</button>
-          </form>
+              <button className="btn btn-secondary m-3">Üye Ol</button>
+            </form>
+          </div>
         </div>
       </div>
     );

@@ -7,6 +7,7 @@ import {
   editTopic,
   editSubTopic
 } from "../../store/actions/forumActions";
+import {editUserMessageCount} from "../../store/actions/userActions"
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
@@ -93,7 +94,8 @@ export class AddNewTopic extends Component {
               topicCount: this.props.topics.length + 1,
               doc: this.props.forumSub[0].id,
               id:this.props.forumSub[0].id,
-              subMessageCount: this.props.forumSub[0].messageCount+1
+              subMessageCount: this.props.forumSub[0].messageCount+1,
+              userMessageCount:userName.messageCount + 1
             },
             () => {
               console.log(this.state)
@@ -103,6 +105,7 @@ export class AddNewTopic extends Component {
               this.props.editSubTopic(this.state);
               this.props.editTopic(this.state);
               this.props.editTopicCount(this.state);
+              this.props.editUserMessageCount(this.state)
               this.props.history.goBack();
             }
           );
@@ -161,7 +164,8 @@ const mapDispatchToProps = dispatch => {
     addMessage: message => dispatch(addMessage(message)),
     editSubTopic: message => dispatch(editSubTopic(message)),
     editTopic: message => dispatch(editTopic(message)),
-    editTopicCount: topicCount => dispatch(editTopicCount(topicCount))
+    editTopicCount: topicCount => dispatch(editTopicCount(topicCount)),
+    editUserMessageCount:user=>dispatch(editUserMessageCount(user))
   };
 };
 
