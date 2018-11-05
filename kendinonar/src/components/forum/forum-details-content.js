@@ -72,7 +72,7 @@ const ForumDetailsContent = ({
               </h3>
             </div>
             <div className="user-info">
-              <p>{"Giriş tarihi: " + moment(messageSender.signUpDate).format('MM.DD.YYYY')}</p>
+              <p>{"Giriş tarihi: " + moment(messageSender.signUpDate).format('DD.MM.YYYY')}</p>
               <p>{"Şehir: " + messageSender.city}</p>
               <p>{"Mesajlar: " + messageSender.messageCount}</p>
             </div>
