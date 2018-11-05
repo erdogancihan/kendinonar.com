@@ -64,8 +64,7 @@ background-position: center;
   height:60px;
   background-color: #B7AF6F; 
   position: relative;
-  top:0%;
-  left:25%;  
+  margin:auto; 
 }
 .avatarTop{
  color:#FFF; 
@@ -88,3 +87,4 @@ background-position: center;
   border:1px solid grey;
   margin-top:50px;
 }
+

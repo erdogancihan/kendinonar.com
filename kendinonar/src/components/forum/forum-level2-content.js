@@ -13,7 +13,7 @@ const ForumLevel2Content = ({ topic }) => {
         </div>
         <div className=" forum col-4 border p-1  ">
         <Link
-            className=" nav-link h5 mb-0 ml-0  p-1"
+            className=" nav-link h6 mb-0 ml-0  p-1"
             to={"/forum/details/" + topic.topicTitle}
           >
             {topic.topicTitle}
@@ -31,7 +31,7 @@ const ForumLevel2Content = ({ topic }) => {
           </p>
         </div>
         <div className="topics col-3 border ">
-          {topic.messageCount + " yorum var"}
+          {topic.messageCount + " mesaj var"}
         </div>
         
       </div>

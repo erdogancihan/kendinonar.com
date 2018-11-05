@@ -13,15 +13,7 @@ class AdminPanel extends Component {
     if (!auth.uid) {
       return <Redirect to="/signin" />;
     }
-    /* çalıştıramadım
-    users &&
-      users.map(user => {
-        if (user.id === auth.uid && user.privilege !== "admin") {
-          console.log(user.privilege);
-          return <Redirect to="/signup" />;
-        }
-      });
-  */
+
     return (
       <div className="container">
         <div className="row">

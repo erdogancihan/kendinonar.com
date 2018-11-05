@@ -11,12 +11,12 @@ const ForumLevel1Content = ({ subTopic }) => {
       <div className=" col-1 border p-0">
         <img className="logo" src={Logo} alt="logo" />
       </div>
-      <div className="forum col-4 border p-1 ">
-        <Link className=" nav-link h5 mb-0 ml-0 " to={"/forum/sub/" + subTopic.sub}>{subTopic.sub}</Link>
+      <div className="forum col-5 border p-0 ">
+        <Link className=" nav-link h6 mb-0 ml-0 p-1 " to={"/forum/sub/" + subTopic.sub}>{subTopic.sub}</Link>
         <p className="p-1">{subTopic.description}</p>
       </div>
       <div className="last-message col-3 p-1 border">
-        <Link className=" nav-link  text-dark mb-0 text-left p-0 " to={"/forum/details/" + subTopic.lastMessageTitle}>
+        <Link className=" nav-link mb-0 text-dark text-left p-0 " to={"/forum/details/" + subTopic.lastMessageTitle}>
         <strong>{subTopic.lastMessageTitle}</strong>  
         </Link>
         <p className="mb-0 ">
@@ -24,10 +24,8 @@ const ForumLevel1Content = ({ subTopic }) => {
         </p>
         <p className="mb-0 ">{ moment(subTopic.lastMessageDate).startOf('day').fromNow()}</p>
       </div>
-      <div className="topics col-2 p-1 border">{subTopic.topicCount} konu var</div>
-      <div className="messages col-2 p-1 border">
-        {subTopic.messageCount} Mesaj var
-      </div>
+      <div className="topics col-3 p-1 border">{subTopic.topicCount} konu var</div>
+    
     </div>
   );
 };

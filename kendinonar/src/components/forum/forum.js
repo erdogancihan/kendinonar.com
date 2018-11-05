@@ -16,12 +16,12 @@ class Forum extends Component {
             <Welcome />
           </div>
           <div className="forum-header">
-            <div className="row">
+            <div className="row no-gutters">
               <div className="col-1" />
-              <div className="forum col-4">Forum</div>
-              <div className="last-message col-3">Son Mesaj</div>
-              <div className="topics col-2 ">Konular</div>
-              <div className="messages col-2">Mesajlar</div>
+              <div className="forum-header1 col-5  p-1">Forum</div>
+              <div className="forum-header1 col-3  p-1">Son Mesaj</div>
+              <div className="forum-header1 col-3 p-1">Konular</div>
+             
             </div>
           </div>
           {forumMain &&

@@ -23,10 +23,10 @@ class ForumLevel2 extends Component {
         <ForumLevel2Header topic={this.props.match.params.id} />
         <div className="forum-header ">
           <div className="row">
-            <div className="logo col-1 " />
-            <div className="forum col-4 ">Konu/Konu Yazarı</div>
-            <div className="last-message col-4 ">Son Mesaj</div>
-            <div className="topics col-3 ">Mesajlar</div>
+            <div className="logo col-1 p-1" />
+            <div className="forum col-4 p-1">Konu/Konu Yazarı</div>
+            <div className="last-message col-4 p-1">Son Mesaj</div>
+            <div className="topics col-3 p-1">Mesajlar</div>
           </div>
         </div>
         <div className="forum-level2 ">{Forumlevel2content}</div>

@@ -50,15 +50,15 @@ const ForumDetailsContent = ({
     <React.Fragment>
       <div className="container">
         <div className="row forum-header">
-          <div className="col-5">{message.messageDate}</div>
-          <div className="col-2">
+          <div className="col-4">{moment(message.messageDate).format('DD.MM.YY HH:MM')}</div>
+          <div className="col-3 p-0 ">
             {" "}
             <Link to={"/addmessage/" + topic} className="new-comment p-0">
               Yeni Yorum
             </Link>
           </div>
           <MessageActions/>
-          <div className="col-1">{'#'+orderNumber}</div>
+          <div className="col-1 p-0">{'#'+orderNumber}</div>
         </div>
         <div className="row forum-details">
           <div className="col-3 col-lg-2 border p-1">
