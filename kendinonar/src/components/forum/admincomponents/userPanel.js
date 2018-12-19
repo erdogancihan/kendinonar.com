@@ -1,11 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteUser, editUser } from "../../../store/actions/userActions";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+import PropTypes from "prop-types";
+import moment from "moment";
 
 class UserPanel extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
+  componentDidMount() {
+    const { firestore } = this.context.store;
+    firestore.get("users");
+    firestore.onSnapshot({ collection: "users" });
+
+    /*
+    store.firestore.setListeners([
+     { collection: 'cities' },
+      { collection: 'users' },
+    ]),
+    */
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
@@ -14,18 +34,20 @@ class UserPanel extends Component {
 
   handleEdit = e => {
     e.preventDefault();
-    this.setState(
-      {
-        id: e.target.id,
-        privilege: e.target.value
-      },
-      () => this.props.editUser(this.state)
+    console.log(e.target.id);
+    this.context.store.firestore.update(
+      { collection: "users", doc: e.target.id },
+      { privilege: e.target.value }
     );
+    //this.props.editUser(this.state)
   };
 
   handleDelete = e => {
     e.preventDefault();
-    this.props.deleteUser(e.target.id);
+    this.context.store.firestore.delete({
+      collection: "users",
+      doc: e.target.id
+    });
   };
 
   render() {
@@ -41,20 +63,22 @@ class UserPanel extends Component {
             <td>{user.email}</td>
             <td>{user.city}</td>
             <td>{user.messageCount}</td>
-            <td>{user.signUpDate}</td>
-            <td  style={{width:'30%'}}>
+            <td>{moment(user.signUpDate).format("MMM Do YY")}</td>
+            <td style={{ width: "30%" }}>
               <select
-                
                 id={user.id}
                 onChange={this.handleEdit}
+                value={user.privilege}
               >
-                <option >{user.privilege}</option>
-                <option >{user.privilege === "admin" ? "acemi" : "admin"}</option>
+                <option>{user.privilege}</option>
+                <option>
+                  {user.privilege === "admin" ? "acemi" : "admin"}
+                </option>
               </select>
             </td>
             <td>
               <span
-                className="btn btn-danger"
+                className="btn btn-danger btn-sm"
                 id={user.id}
                 onClick={this.handleDelete}
               >
@@ -68,24 +92,24 @@ class UserPanel extends Component {
     return (
       <React.Fragment>
         <h5 className="text-center">Kullanıcılar</h5>
-        <div className="card">
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>User Name</th>
-              <th>Email</th>
-              <th>City</th>
-              <th>Message Count</th>
-              <th>SignUp Date</th>
-              <th >Privilege</th>
-              <th/>
-            </tr>
-          </thead>
-          <tbody>{user}</tbody>
-        </table>
-
+        <div className="card ">
+          <div className="table-responsive-lg">
+            <table className="table table-sm   table-hover">
+              <thead>
+                <tr>
+                  <th>User Name</th>
+                  <th>Email</th>
+                  <th>City</th>
+                  <th>Message Count</th>
+                  <th>SignUp Date</th>
+                  <th>Privilege</th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>{user}</tbody>
+            </table>
+          </div>
         </div>
-        
       </React.Fragment>
     );
   }
@@ -96,16 +120,5 @@ const mapStateToProps = state => {
     users: state.firestore.ordered.users
   };
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    editUser: users => dispatch(editUser(users)),
-    deleteUser: users => dispatch(deleteUser(users))
-  };
-};
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  firestoreConnect([{ collection: "users" }])
-)(UserPanel);
+
+export default connect(mapStateToProps)(UserPanel);

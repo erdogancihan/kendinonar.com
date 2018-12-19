@@ -1,44 +1,87 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addUser } from "../../store/actions/userActions";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+import PropTypes from "prop-types";
 
 class signUp extends Component {
-  state = {
-    email: "",
-    password: "",
-    userName: "",
-    city: "",
-    privilege: "acemi",
-    signUpDate: "",
-    messageCount: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {
+        email: "",
+        password: "",
+        userName: "",
+        city: ""
+      },
+      message: null
+    };
+  }
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
 
+  componentDidMount() {
+    const { firestore } = this.context.store;
+    firestore.get("users");
+    firestore.onSnapshot({ collection: "users" });
+
+    /*
+    store.firestore.setListeners([
+     { collection: 'cities' },
+      { collection: 'users' },
+    ]),
+    */
+  }
   //set state from form
   handleChange = e => {
     this.setState({
-      [e.target.id]: e.target.value
+      user:{...this.state.user, [e.target.id]: e.target.value}
     });
   };
   //add new user
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.password === this.state.password1) {
-      this.props.addUser(this.state);
-      this.setState({
-        email: "",
-        password: "",
-        userName: "",
-        city: "",
-        privilege: "user",
-        signUpDate: "",
-        messageCount: 0
-      });
-      this.props.history.goBack();
-    } else {
+      this.context.store.firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.user.email, this.state.user.password)
+        .then(response => {
+          console.log(response.user.uid)
+
+         this.context.store.firestore.set(
+            { collection: "users", doc: response.user.uid },
+            {
+              userName: this.state.user.userName,
+              city: this.state.user.city,
+              privilege: "acemi",
+              signUpDate: new Date().toISOString(),
+              messageCount: 0,
+              email:this.state.user.email
+            }
+          );
+        })
+        .then(() => {
+          this.setState({
+            ...this.state,
+            user: {
+              email: "",
+              password: "",
+              userName: "",
+              city: ""
+            }
+          });
+          this.props.history.push("/");
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({
+            ...this.state,
+            message: err.message
+          });
+        });
     }
   };
+
   render() {
     return (
       <div className="container">
@@ -120,6 +163,7 @@ class signUp extends Component {
               </div>
 
               <button className="btn btn-secondary m-3">Üye Ol</button>
+              <div>{this.state.message}</div>
             </form>
           </div>
         </div>
@@ -128,15 +172,12 @@ class signUp extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
+  console.log(state);
   return {
-    addUser: user => dispatch(addUser(user))
+    users: state.firestore.ordered.users,
+    authError: state.firebase.authError
   };
 };
-export default compose(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  firestoreConnect([{ collection: "user" }])
-)(signUp);
+
+export default connect(mapStateToProps)(signUp);

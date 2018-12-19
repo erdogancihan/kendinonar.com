@@ -1,6 +1,4 @@
 {
-  
-  
   "hosting": {
     "public": "build",
     "ignore": [
@@ -14,5 +12,15 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+      "source": "functions"
   }
 }

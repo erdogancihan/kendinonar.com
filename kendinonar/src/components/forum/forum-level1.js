@@ -1,6 +1,5 @@
 import React from "react";
 import ForumLevel1Content from "./forum-level1-content";
-import { Link } from "react-router-dom";
 
 const ForumLevel1 = ({ forumMain, forumSub }) => {
   return (
@@ -24,7 +23,8 @@ const ForumLevel1 = ({ forumMain, forumSub }) => {
                 />
               );
             }
-          })}
+          }
+          )}
       </div>
     </React.Fragment>
   );

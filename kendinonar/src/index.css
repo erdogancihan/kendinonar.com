@@ -87,4 +87,7 @@ background-position: center;
   border:1px solid grey;
   margin-top:50px;
 }
+table {
+  font-size: 0.7rem;
+}
 

@@ -1,0 +1,127 @@
+webpackHotUpdate("main",{
+
+/***/ "./src/components/main/homePage/HomePage.js":
+/*!**************************************************!*\
+  !*** ./src/components/main/homePage/HomePage.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+var _this = undefined,
+    _jsxFileName = "C:\\Users\\erd\\Desktop\\web development\\sorular\\src\\components\\main\\homePage\\HomePage.js";
+
+
+
+
+
+var HomePage = function HomePage() {
+  var buttonLink;
+
+  var buttonlink = function buttonlink() {
+    if (_this.props.session.id === null) {
+      buttonLink = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/login",
+        className: "button",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 10
+        },
+        __self: this
+      }, "Yar\u0131\u015Fmaya Ba\u015Fla");
+    } else {
+      buttonLink = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/exam/all",
+        className: "button",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 16
+        },
+        __self: this
+      }, "Yar\u0131\u015Fmaya Ba\u015Fla");
+    }
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex-container",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "center",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: this
+  }, "Bilgi Yar\u0131\u015Fmas\u0131na Ho\u015Fgeldiniz.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "home",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "justify indent",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29
+    },
+    __self: this
+  }, "Uygulamam\u0131z sayesinde hem e\u011Flenecek, hem de \xF6\u011Freneceksiniz."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "justify indent",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: this
+  }, "Yar\u0131\u015Fma i\xE7erisinde 4 se\xE7enekli sorular bulunmaktad\u0131r ve her sorunun tek cevab\u0131 vard\u0131r. Sorular bir soru havuzu i\xE7erisinden rastgele se\xE7ilir.Sorular kolaydan zora do\u011Fru sorulur. \u0130lk 5 soru 1 puan, 5'den 10'a kadar 2 puan, 10'dan 20'ye kadar 3 puan, 20'den 30'a kadar 4 puan, 30'uncu sorudan itibaren de 5 puand\u0131r."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "justify indent",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }, "Soruyu cevaplamak i\xE7in 30 saniyeniz var. Her yar\u0131\u015Fmada 3 joker hakk\u0131n\u0131z var. 50% jokeri ile yanl\u0131\u015F iki \u015F\u0131k elenir. Soruyu ge\xE7 jokeri ile bir sonraki soruya ge\xE7ebilirsiniz. S\xFCre yetmezse s\xFCreyi uzat jokeri ile s\xFCreyi 30 saniye uzatabilirsiniz."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "justify indent",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: this
+  }, "Bir saatlik s\xFCre i\xE7erinde 3 kere yar\u0131\u015Fma hakk\u0131n\u0131z vard\u0131r.Yar\u0131\u015Fmaya ba\u015Flamak i\xE7in siteye \xFCye olman\u0131z gerekmektedir."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex-container",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: this
+  }), buttonLink));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    session: state.session.session
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(HomePage));
+
+/***/ })
+
+})
+//# sourceMappingURL=main.d30d82d075e15344e8ce.hot-update.js.map

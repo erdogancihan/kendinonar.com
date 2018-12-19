@@ -1,22 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { editMessage } from "../../store/actions/forumActions";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import CKEditor from "react-ckeditor-component";
+import PropTypes from "prop-types";
 
 export class EditMessage extends Component {
-  state = {
-    messageContent: "",
-    messageDate: "",
-    doc: ""
+  constructor(props) {
+    super(props);
+    this.state = {
+      messageContent: "",
+      messageDate: "",
+      doc: ""
+    };
+  }
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
 
-  componentDidMount() {
+  componentDidMount(){
+    console.log(this.props.messages[this.props.match.params.id])
     this.setState({
       ...this.state,
-      messageContent: this.props.message.messageContent
+      messageContent: this.props.messages[this.props.match.params.id].messageContent
     });
   }
 
@@ -44,25 +49,37 @@ export class EditMessage extends Component {
     console.log("afterPaste event called with event info: ", evt);
   };
 
+  editMessage = () => {
+    const message = {
+      messageContent: this.state.messageContent,
+      messageDate: this.state.messageDate
+    };
+    this.context.store.firestore.update(
+      { collection: "messages", doc: this.state.doc },
+      message
+    );
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-
     this.setState(
       {
         ...this.state,
-        messageDate: new Date().toLocaleString(),
+        messageDate: new Date().toISOString(),
         doc: this.props.match.params.id
       },
       () => {
         console.log(this.state);
-        this.props.editMessage(this.state);
+        this.editMessage();
       }
     );
     this.props.history.goBack();
   };
 
   render() {
-    if (this.props.auth.uid !== this.props.message.messageSenderUserId) {
+
+    console.log(this.props.message)
+    if (!this.props.auth.uid) {
       return <Redirect to="/signin" />;
     }
     return (
@@ -88,31 +105,12 @@ export class EditMessage extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const id = ownProps.match.params.id;
-  const messages = state.firestore.data.messages;
-  const message = messages ? messages[id] : null;
+const mapStateToProps = state => {
+  console.log(state);
   return {
-    message: message,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    messages: state.firestore.data.messages
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    editMessage: message => dispatch(editMessage(message))
-  };
-};
-
-//
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  firestoreConnect(props => [
-    {
-      collection: "messages"
-    }
-  ])
-)(EditMessage);
+export default connect(mapStateToProps)(EditMessage);

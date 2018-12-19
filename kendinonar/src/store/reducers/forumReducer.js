@@ -62,7 +62,6 @@ const forumReducer = (state = initState, action) => {
   switch (action.type) {
     case "ADD_MAINTOPIC":
       console.log("maintopic added", action.mainTopic);
-
       return state;
     case "ADD_MAINTOPIC_ERR":
       console.log("add maintopic err", action.err);

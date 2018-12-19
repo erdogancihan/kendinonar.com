@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+   
+   
+    <title>Sorular</title>
+  <style type="text/css">@import url(https://fonts.googleapis.com/css?family=Open+Sans);</style><style type="text/css">/*utilities*/
+/* line 21, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.center {
+  text-align: center;
+}
+
+/* line 24, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.justifty {
+  text-align: justify;
+  text-justify: auto;
+}
+
+/* line 28, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.indent {
+  text-indent: 2em;
+}
+
+/* line 31, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form {
+  margin: 1.5em 0;
+}
+
+/* line 36, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.button {
+  border: none;
+  border-radius: 20px;
+  min-width: 80px;
+  outline: none;
+  padding: 0.5em 1em;
+  background-color: #EB6864;
+  color: #f8f9fa;
+  margin: 0.3em;
+}
+
+/* line 46, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.button:hover {
+  color: #f8f9fa;
+  background-color: #ff3831;
+}
+
+/* line 51, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 56, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.form-group {
+  display: flex;
+  margin-bottom: 1em;
+  justify-content: space-between;
+}
+
+/* line 62, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+label {
+  min-width: 130px;
+  margin: 0.3em;
+}
+
+/* line 67, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+input[type="email"] {
+  font-family: 'Open Sans', sans-serif;
+  outline: none;
+  border-radius: 10px;
+  height: 2em;
+  padding: 0 1em;
+}
+
+/* line 74, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+input[type="password"] {
+  font-family: 'Open Sans', sans-serif;
+  outline: none;
+  border-radius: 10px;
+  height: 2em;
+  padding: 0 1em;
+}
+
+/* line 81, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+input[type="text"] {
+  font-family: 'Open Sans', sans-serif;
+  outline: none;
+  border-radius: 10px;
+  height: 2em;
+  padding: 0 1em;
+}
+
+/* line 88, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+input[type="number"] {
+  font-family: 'Open Sans', sans-serif;
+  outline: none;
+  border-radius: 10px;
+  height: 2em;
+  padding: 0 1em;
+}
+
+/* line 95, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+textarea {
+  font-family: 'Open Sans', sans-serif;
+  outline: none;
+  border-radius: 10px;
+  height: 7em;
+  width: 90%;
+  padding: 0 1em;
+}
+
+/* line 103, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+select {
+  font-family: 'Open Sans', sans-serif;
+  outline: none;
+  border-radius: 10px;
+  height: 2em;
+  padding: 0 1em;
+  width: 190px;
+}
+
+/* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_layout.scss */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/*Layout*/
+/* line 10, C:/Users/erd/Desktop/web development/sorular/src/sass/_layout.scss */
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 19, C:/Users/erd/Desktop/web development/sorular/src/sass/_layout.scss */
+.container {
+  margin: auto;
+  max-width: 700px;
+  padding: 0 2em;
+}
+
+/* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar {
+  min-height: 45px;
+  background-color: #EB6864;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* line 9, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar .nav-link {
+  text-decoration: none;
+  -webkit-columns: #f8f9fa;
+          columns: #f8f9fa;
+  font-size: 1em;
+  color: #f8f9fa;
+}
+
+/* line 16, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar .navbar-brand {
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 10px 5px;
+}
+
+/* line 20, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar .navbar-brand:hover {
+  background-color: #ff3831;
+  color: #f8f9fa;
+}
+
+/* line 25, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar .nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* line 31, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar .nav .nav-item {
+  margin: 0;
+  display: inline-block;
+  padding: 12px 10px;
+  color: #f8f9fa;
+}
+
+/* line 36, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar .nav .nav-item:hover {
+  background-color: #ff3831;
+  color: #f8f9fa;
+}
+
+/* line 44, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.user-logo {
+  border-radius: 50%;
+  background-color: #f8f9fa;
+  color: #EB6864 !important;
+}
+
+/* line 48, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.user-logo:hover {
+  background-color: #ff3831;
+  color: #f8f9fa !important;
+}
+
+/* line 54, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* line 58, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #EB6864;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* line 66, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown-content a {
+  color: #f8f9fa;
+  padding: 6px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* line 72, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown-content a:hover {
+  background-color: #ff3831;
+}
+
+/*
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+*/
+/* line 80, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.drop {
+  display: block;
+}
+
+/* line 84, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown:hover .dropbtn {
+  background-color: #EB6864;
+}
+
+/* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.question-bar {
+  background-color: #44a9e4;
+  margin: 0;
+  margin-bottom: 2em;
+  min-height: 80px;
+}
+
+/* line 6, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.question-bar .question-bar-item {
+  color: #f8f9fa;
+  padding: 0.5em 0.5em;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+/* line 14, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.question-text {
+  padding: 0.5em;
+  text-align: center;
+}
+
+/* line 18, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.button-answer {
+  outline: none;
+  border-radius: 20px;
+  border: none;
+  background-color: #EB6864;
+  min-height: 30px;
+  width: 300px;
+  padding: 0.2em;
+  color: #f8f9fa;
+  margin: 0.2em;
+}
+
+/* line 29, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.success {
+  background-color: #22B24C;
+}
+
+/* line 32, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.warning {
+  background-color: #ff0800;
+}
+
+/* line 35, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.btn-joker {
+  outline: none;
+  border-radius: 20px;
+  border: none;
+  background-color: #22B24C;
+  min-height: 30px;
+  width: 100px;
+  padding: 0.2em;
+  color: #f8f9fa;
+  margin-top: 2em;
+}
+
+/* line 46, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.disabled {
+  cursor: not-allowed;
+  background-color: #aaa;
+}
+
+/* line 51, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.progressbar {
+  margin: 20px 20px;
+  margin-top: 2em;
+  height: 40px;
+  border: 2px solid #EB6864;
+}
+
+/* line 57, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.progressbar h3 {
+  text-align: center;
+  padding: 7px;
+  margin: 0;
+}
+
+/* line 63, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.progress {
+  position: relative;
+  background-color: #369;
+  height: 40px;
+  width: 100px;
+  top: -40px;
+}
+
+/* line 70, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.hidden, .remove {
+  display: none;
+}
+
+/* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_admin.scss */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* line 8, C:/Users/erd/Desktop/web development/sorular/src/sass/_admin.scss */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #c27f7f;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  top: 5px;
+  left: 105%;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+/* line 24, C:/Users/erd/Desktop/web development/sorular/src/sass/_admin.scss */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* line 3, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* line 9, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+th {
+  background-color: #EB6864;
+  color: #f8f9fa;
+}
+
+/* line 15, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+tr:nth-child(even) {
+  background-color: #fcd9d8;
+  color: #222;
+}
+
+/* line 20, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+table,
+th,
+td {
+  text-align: center;
+  vertical-align: center;
+  font-size: 0.9em;
+  padding: 0.2em 0.2em;
+}
+
+/* line 28, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+.table {
+  overflow-x: auto;
+}</style></head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"><div class="App"><nav class="navbar"><div class="navbar-brand"> <a class="nav-link" href="http://localhost:3000/">Bilgi Yarışması</a></div><ul class="nav "><div class="dropdown"><li class="nav-item nav-link dropbtn">Yarışma</li><div class="dropdown-content" id="dropdownContent"><a href="http://localhost:3000/exam/all">Tümü</a><a href="http://localhost:3000/exam/0matematik">Matematik</a><a href="http://localhost:3000/exam/0tarih">Tarih</a><a href="http://localhost:3000/exam/0fen">Fen</a><a href="http://localhost:3000/exam/0din%20bilgisi">Din Bilgisi</a><a href="http://localhost:3000/exam/0edebiyat">Edebiyat</a><a href="http://localhost:3000/exam/0d%C3%BCnyadan">Genel Kültür</a><a href="http://localhost:3000/exam/0cografya">Coğrafya</a><a href="http://localhost:3000/exam/1ingilizce">İngilizce</a><a href="http://localhost:3000/exam/1almanca">Almanca</a><a href="http://localhost:3000/exam/1frans%C4%B1zca">Fransızca</a></div></div><a class="nav-link " href="http://localhost:3000/"><li class="nav-item user-logo ">test</li></a><a class="nav-link" href="http://localhost:3000/"><li class="nav-item">Çıkış</li></a></ul></nav><div class="container"><div class="flex-container"><h2 class="center">Bilgi Yarışmasına Hoşgeldiniz.</h2></div><div class="home"><p class="justify indent">Uygulamamız sayesinde hem eğlenecek, hem de öğreneceksiniz.</p><p class="justify indent">Yarışma içerisinde 4 seçenekli sorular bulunmaktadır ve her sorunun tek cevabı vardır. Sorular bir soru havuzu içerisinden rastgele seçilir.Sorular kolaydan zora doğru sorulur. İlk 5 soru 1 puan, 5'den 10'a kadar 2 puan, 10'dan 20'ye kadar 3 puan, 20'den 30'a kadar 4 puan, 30'uncu sorudan itibaren de 5 puandır.</p><p class="justify indent">Soruyu cevaplamak için 30 saniyeniz var. Her yarışmada 3 joker hakkınız var. 50% jokeri ile yanlış iki şık elenir. Soruyu geç jokeri ile bir sonraki soruya geçebilirsiniz. Süre yetmezse süreyi uzat jokeri ile süreyi 30 saniye uzatabilirsiniz.</p><p class="justify indent">Bir saatlik süre içerinde 3 kere yarışma hakkınız vardır.Yarışmaya başlamak için siteye üye olmanız gerekmektedir.</p><div class="flex-container"></div></div></div><h3 class="center">Copyright © 2018</h3></div></div>
+
+  
+    <script src="./Sorular_files/bundle.js.download"></script><script src="./Sorular_files/1.chunk.js.download"></script><script src="./Sorular_files/main.chunk.js.download"></script><script src="./Sorular_files/main.d30d82d075e15344e8ce.hot-update.js.download"></script>
+
+</body></html>

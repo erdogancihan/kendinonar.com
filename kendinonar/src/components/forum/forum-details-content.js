@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from 'moment';
+import "moment/locale/tr";
 
 const ForumDetailsContent = ({
   message,
@@ -31,9 +32,10 @@ const ForumDetailsContent = ({
           </div>
           <div className="col-6">
             <Link
-              to={"/forum/details/" + topic}
+              to=""
+              id={message.id}
               className="new-comment p-0 "
-              onClick={handleDelete}
+              onClick={deleteMessage}
             >
               Sil
             </Link>
@@ -50,7 +52,7 @@ const ForumDetailsContent = ({
     <React.Fragment>
       <div className="container">
         <div className="row forum-header">
-          <div className="col-4">{moment(message.messageDate).format('DD.MM.YY HH:MM')}</div>
+          <div className="col-4">{moment(message.messageDate).format('ll')}</div>
           <div className="col-3 p-0 ">
             {" "}
             <Link to={"/addmessage/" + topic} className="new-comment p-0">

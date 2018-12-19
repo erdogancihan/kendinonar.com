@@ -27,7 +27,7 @@ const ForumLevel2Content = ({ topic }) => {
             Son Gönderi <Link to="">{topic.lastMessageSender}</Link>{" "}
           </p>
           <p className="p-0 mb-0">
-            {moment(topic.lastMessageDate.toString()).startOf('day').fromNow()}
+            {moment(topic.lastMessageDate.toString()).fromNow()}
           </p>
         </div>
         <div className="topics col-3 border ">

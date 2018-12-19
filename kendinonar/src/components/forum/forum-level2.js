@@ -2,10 +2,21 @@ import React, { Component } from "react";
 import ForumLevel2Content from "./forum-level2-content";
 import ForumLevel2Header from "./forum-level2-header";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+import PropTypes from "prop-types";
 
 class ForumLevel2 extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
+  componentDidMount() {
+    const { firestore } = this.context.store;
+
+    firestore.get("topics");
+
+    firestore.setListeners([{ collection: "topics" }]);
+    // firestore.onSnapshot({ collection: "topics" });
+  }
   render() {
     const { forumTopics } = this.props;
     console.log(this.props);
@@ -34,18 +45,11 @@ class ForumLevel2 extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
+  console.log(state);
   return {
     forumTopics: state.firestore.ordered.topics
   };
 };
-
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([
-    { collection: "mainTopic" },
-    { collection: "subTopic" },
-    { collection: "topics", orderBy: ["lastMessageDate", "desc"] },
-    { collection: "users" }
-  ])
-)(ForumLevel2);
+export default connect(mapStateToProps)(ForumLevel2);

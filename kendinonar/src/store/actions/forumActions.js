@@ -1,3 +1,5 @@
+import store from "../../config/fbConfig";
+
 //Adds maintopic
 export const addMainTopic = mainTopic => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -54,7 +56,7 @@ export const editSubTopic = message => {
         lastMessageDate: message.lastMessageDate,
         lastMessageSender: message.lastMessageSender,
         lastMessageTitle: message.topicTitle,
-        messageCount:message.subMessageCount
+        messageCount: message.subMessageCount
       })
       .then(() => {
         dispatch({ type: "EDIT_SUBTOPIC", message });
@@ -120,7 +122,6 @@ export const addTopic = message => {
     firestore
       .collection("topics")
       .add({
-       
         sub: message.sub,
         topicTitle: message.topicTitle,
         messageCount: 1,
@@ -186,11 +187,11 @@ export const editMessage = message => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     firestore
-      .collection("messages").doc(message.doc)
+      .collection("messages")
+      .doc(message.doc)
       .update({
-      
         messageContent: message.messageContent,
-        messageDate: message.messageDate,
+        messageDate: message.messageDate
       })
       .then(() => {
         dispatch({ type: "EDIT_MESSAGE", message });
@@ -204,7 +205,7 @@ export const editMessage = message => {
 export const deleteMessage = message => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    console.log('message delete', message.id)
+    console.log("message delete", message.id);
     firestore
       .delete({ collection: "messages", doc: message.id })
       .then(() => {
@@ -215,5 +216,3 @@ export const deleteMessage = message => {
       });
   };
 };
-
-

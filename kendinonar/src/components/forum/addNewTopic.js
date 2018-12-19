@@ -1,37 +1,48 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  addTopic,
-  addMessage,
-  editTopicCount,
-  editTopic,
-  editSubTopic
-} from "../../store/actions/forumActions";
-import {editUserMessageCount} from "../../store/actions/userActions"
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import CKEditor from "react-ckeditor-component";
+import PropTypes from "prop-types";
 
 export class AddNewTopic extends Component {
-  state = {
-   
-    sub: this.props.match.params.id,
-    topicTitle: "",
-    messageCount: 1,
-    viewCount: 0,
-    lastMessageDate: "",
-    lastMessageSender: "",
-    topicSender: "",
-    messageContent: "",
-    messageDate: "",
-    messageSender: "",
-    topicSenderUserId: "",
-    topicCount: "",
-    doc:'',
-    id: "",
-    subMessageCount:''
+  constructor(props) {
+    super(props);
+    this.state = {
+      sub: this.props.match.params.id,
+      topicTitle: "",
+      messageCount: 1,
+      viewCount: 0,
+      lastMessageDate: "",
+      lastMessageSender: "",
+      topicSender: "",
+      messageContent: "",
+      messageDate: "",
+      messageSender: "",
+      topicSenderUserId: "",
+      topicCount: "",
+      doc: "",
+      id: "",
+      subMessageCount: ""
+    };
+  }
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
+
+  componentDidMount() {
+    const { firestore } = this.context.store;
+    firestore.get({
+      collection: "topics",
+      where: ["sub", "==", this.props.match.params.id],
+      storeAs: "topicsFiltered"
+    });
+    firestore.get({
+      collection: "subTopic",
+      where: ["sub", "==", this.props.match.params.id],
+      storeAs: "subTopicsFiltered"
+    });
+  }
 
   handleChange = e => {
     this.setState({
@@ -53,7 +64,7 @@ export class AddNewTopic extends Component {
       ...this.state,
       messageContent: newContent
     });
-  console.log(evt.editor.getData())
+    console.log(evt.editor.getData());
   };
 
   onBlur = evt => {
@@ -64,22 +75,74 @@ export class AddNewTopic extends Component {
     console.log("afterPaste event called with event info: ", evt);
   };
 
+  addTopic = () => {
+    const topic = {
+      sub: this.state.sub,
+      topicTitle: this.state.topicTitle,
+      messageCount: 1,
+      viewCount: 0,
+      lastMessageDate: this.state.lastMessageDate,
+      lastMessageSender: this.state.lastMessageSender,
+      topicSender: this.state.topicSender,
+      topicSenderUserId: this.state.topicSenderUserId
+    };
+    this.context.store.firestore.add("topics", topic);
+  };
+
+  addMessage = () => {
+    const message = {
+      topicTitle: this.state.topicTitle,
+      messageContent: this.state.messageContent,
+      messageDate: this.state.messageDate,
+      messageSenderUserId: this.state.messageSenderUserId,
+      messageSender: this.state.messageSender
+    };
+    this.context.store.firestore.add("messages", message);
+  };
+
+  editSubTopic = () => {
+    const subTopic = {
+      lastMessageDate: this.state.lastMessageDate,
+      lastMessageSender: this.state.lastMessageSender,
+      lastMessageTitle: this.state.topicTitle,
+      messageCount: this.state.subMessageCount,
+      topicCount: this.state.topicCount
+    };
+    this.context.store.firestore.update(
+      { collection: "subTopic", doc: this.state.id },
+      subTopic
+    );
+  };
+
+  editTopic = () => {
+    const topic = {
+      messageCount: this.state.messageCount,
+      lastMessageDate: this.state.lastMessageDate,
+      lastMessageSender: this.state.lastMessageSender
+    };
+    this.context.store.firestore.update(
+      { collection: "topics", doc: this.state.doc },
+      topic
+    );
+  };
+
+  editUserMessageCount = () => {
+    const messageCount = {
+      messageCount: this.state.userMessageCount
+    };
+    this.context.store.firestore.update(
+      { collection: "users", doc: this.state.messageSenderUserId },
+      messageCount
+    );
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-
-    let userName = null;
-    this.props.users &&
-      this.props.users.map(user => {
-        if (user.id === this.props.auth.uid) {
-          return (userName = user);
-        }
-      });
-
-  
-    let date = new Date().toLocaleString();
+    const { user } = this.props;
+    let date = new Date().toISOString();
     const mainTopic =
-      this.props.forumSub &&
-      this.props.forumSub.map(topic => {
+      this.props.subTopicsFiltered &&
+      this.props.subTopicsFiltered.map(topic => {
         if (this.props.match.params.id === topic.sub) {
           return this.setState(
             {
@@ -87,25 +150,23 @@ export class AddNewTopic extends Component {
               messageDate: date,
               lastMessageDate: date,
               topicSenderUserId: this.props.auth.uid,
-              topicSender: userName.userName,
+              topicSender: user.userName,
               messageSenderUserId: this.props.auth.uid,
-              messageSender: userName.userName,
-              lastMessageSender: userName.userName,
-              topicCount: this.props.topics.length + 1,
-              doc: this.props.forumSub[0].id,
-              id:this.props.forumSub[0].id,
-              subMessageCount: this.props.forumSub[0].messageCount+1,
-              userMessageCount:userName.messageCount + 1
+              messageSender: user.userName,
+              lastMessageSender: user.userName,
+              topicCount: this.props.topicsFiltered.length + 1,
+              doc: this.props.subTopicsFiltered[0].id,
+              id: this.props.subTopicsFiltered[0].id,
+              subMessageCount: this.props.subTopicsFiltered[0].messageCount + 1,
+              userMessageCount: user.messageCount + 1
             },
             () => {
-              console.log(this.state)
-             
-              this.props.addTopic(this.state);
-              this.props.addMessage(this.state);
-              this.props.editSubTopic(this.state);
-              this.props.editTopic(this.state);
-              this.props.editTopicCount(this.state);
-              this.props.editUserMessageCount(this.state)
+              console.log(this.state);
+              this.addTopic();
+              this.addMessage();
+              this.editSubTopic();
+              this.editTopic();
+              this.editUserMessageCount();
               this.props.history.goBack();
             }
           );
@@ -149,34 +210,20 @@ export class AddNewTopic extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  //  console.log(state)
-  return {
-    topics: state.firestore.ordered.topics,
-    forumSub: state.firestore.ordered.subTopic,
-    auth: state.firebase.auth,
-    users: state.firestore.ordered.users
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    addTopic: message => dispatch(addTopic(message)),
-    addMessage: message => dispatch(addMessage(message)),
-    editSubTopic: message => dispatch(editSubTopic(message)),
-    editTopic: message => dispatch(editTopic(message)),
-    editTopicCount: topicCount => dispatch(editTopicCount(topicCount)),
-    editUserMessageCount:user=>dispatch(editUserMessageCount(user))
-  };
-};
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  firestoreConnect(props => [
-    { collection: "topics", where: ["sub", "==", props.match.params.id] },
-    { collection: "subTopic", where: ["sub", "==", props.match.params.id] },
-    { collection: "users" }
-  ])
-)(AddNewTopic);
+const mapStateToProps = state => {
+  console.log(state);
+  const userId = state.firebase.auth.uid;
+  let user = null;
+  if (userId) {
+    const users = state.firestore.data.users;
+    user = users ? users[userId] : null;
+  }
+  return {
+    topicsFiltered: state.firestore.ordered.topicsFiltered,
+    subTopicsFiltered: state.firestore.ordered.subTopicsFiltered,
+    auth: state.firebase.auth,
+    user: user
+  };
+};
+export default connect(mapStateToProps)(AddNewTopic);

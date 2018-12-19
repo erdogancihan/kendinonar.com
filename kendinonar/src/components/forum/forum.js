@@ -7,6 +7,7 @@ import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 
 class Forum extends Component {
+ 
   render() {
     const { forumMain, forumSub } = this.props;
     return (
@@ -21,7 +22,6 @@ class Forum extends Component {
               <div className="forum-header1 col-5  p-1">Forum</div>
               <div className="forum-header1 col-3  p-1">Son Mesaj</div>
               <div className="forum-header1 col-3 p-1">Konular</div>
-             
             </div>
           </div>
           {forumMain &&

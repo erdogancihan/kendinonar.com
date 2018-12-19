@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AdminLinks from "../navbar/adminLinks";
-import {connect} from 'react-redux';
-import {signOut} from '../../store/actions/authActions';
 
 
 const SignedInLinks = (props) => {
-  
-  return (
+
+   return (
     <React.Fragment>
     {props.user && props.user.privilege ==='admin' ? <AdminLinks /> : null}      
     <li className="nav-item ">
@@ -24,9 +22,5 @@ const SignedInLinks = (props) => {
   );
 };
 
-const mapDispatchToProps=(dispatch)=>{
-  return{
-    signOut:()=>dispatch(signOut())
-  }
-}
-export default connect(null, mapDispatchToProps) (SignedInLinks);
+
+export default SignedInLinks;

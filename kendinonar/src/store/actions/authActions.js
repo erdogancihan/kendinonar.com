@@ -6,18 +6,21 @@ export const signIn = credentials => {
       .auth()
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(() => {
-        dispatch({ type: "LOGIN_SUCCESS" });
+        return dispatch({ type: "LOGIN_SUCCESS" });
       })
       .catch(err => {
-        dispatch({ type: "LOGIN_ERROR", err });
+        return dispatch({ type: "LOGIN_ERROR", err });
       });
   };
 };
 export const signOut = () => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
-    firebase.auth().signOut().then(()=>{
-      dispatch({ type: "SIGNOUT_SUCCESS" });
-    })
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        return dispatch({ type: "SIGNOUT_SUCCESS" });
+      });
   };
 };

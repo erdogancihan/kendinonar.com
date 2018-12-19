@@ -1,23 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  addMainTopic,
-  addSubTopic,
-  deleteMainTopic,
-  deleteSubTopic
-} from "../../../store/actions/forumActions";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+import PropTypes from 'prop-types'
+
 
 class ForumPanel extends Component {
-  state = {
-    forumMain: {
-      main: ""
-    },
-    forumSub: {
-      main: ""
-    }
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      forumMain: {
+        main: ""
+      },
+      forumSub: {
+        main: ""
+      }
+    };
+  }
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  }
+
+  componentDidMount () {
+    const { firestore } = this.context.store
+    firestore.get('mainTopic')
+    firestore.get('subTopic')
+    firestore.onSnapshot({collection:"mainTopic"})
+    firestore.onSnapshot({collection:"subTopic"})
+    /*
+    store.firestore.setListeners([
+     { collection: 'cities' },
+      { collection: 'users' },
+    ]),
+    */
+   }
 
   handleChange = e => {
     this.setState({
@@ -41,7 +55,8 @@ class ForumPanel extends Component {
   handleSubSubmit = e => {
     e.preventDefault();
     console.log(this.state.forumSub);
-    this.props.addSubTopic(this.state.forumSub);
+    //this.props.addSubTopic(this.state.forumSub);
+    this.context.store.firestore.add("subTopic",this.state.forumSub)
     this.setState({
       forumMain:{main:''},
       forumSub: {
@@ -54,15 +69,15 @@ class ForumPanel extends Component {
 
   //add Maintopic
   handleMainSubmit = e => {
-    e.preventDefault();
-    
+    e.preventDefault();    
     //get input value without manupulating the state.
     this.setState(
       {
         forumMain: { main: document.getElementById("mainTopicInput").value }
       },
       () => {
-        this.props.addMainTopic(this.state.forumMain);
+        //this.props.addMainTopic(this.state.forumMain);
+      this.context.store.firestore.add("mainTopic",this.state.forumMain)
       }
     );
 
@@ -70,17 +85,20 @@ class ForumPanel extends Component {
     //reset the mainTopic textbox
     document.getElementById("mainTopicInput").value = null;
   };
-
+ 
   //delete maintopic
   handleMainDelete = e => {
     e.preventDefault();
-    this.props.deleteMainTopic(e.target.id);
+    //this.props.deleteMainTopic(e.target.id);
+    this.context.store.firestore.delete({collection:"mainTopic", doc:e.target.id})
   };
 
   //delete subtopic
   handleSubDelete = e => {
     e.preventDefault();
-    this.props.deleteSubTopic(e.target.id);
+    //this.props.deleteSubTopic(e.target.id);
+    this.context.store.firestore.delete({collection:"subTopic", doc:e.target.id})
+
   };
 
   render() {
@@ -131,7 +149,7 @@ class ForumPanel extends Component {
                 </h5>
                 <ul className="list-group">
                   {forumSub &&
-                    forumSub.map(SubTopic => {
+                    forumSub.map(SubTopic => {                      
                       if (mainTopic.main === SubTopic.main) {
                         return (
                           <li className="list-group-item" key={SubTopic.id}>
@@ -197,23 +215,12 @@ class ForumPanel extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    forumMain: state.firestore.ordered.mainTopic,
-    forumSub: state.firestore.ordered.subTopic
+  console.log(state)
+  return  {
+    forumMain:state.firestore.ordered.mainTopic,
+    forumSub:state.firestore.ordered.subTopic,
+
   };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    addMainTopic: mainTopic => dispatch(addMainTopic(mainTopic)),
-    addSubTopic: subTopic => dispatch(addSubTopic(subTopic)),
-    deleteMainTopic: mainTopic => dispatch(deleteMainTopic(mainTopic)),
-    deleteSubTopic: subTopic => dispatch(deleteSubTopic(subTopic))
-  };
-};
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  firestoreConnect([{ collection: "mainTopic" }, { collection: "subTopic" }])
-)(ForumPanel);
+}; 
+
+export default connect(mapStateToProps)(ForumPanel);

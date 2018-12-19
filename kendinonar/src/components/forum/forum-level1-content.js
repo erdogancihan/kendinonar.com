@@ -22,7 +22,7 @@ const ForumLevel1Content = ({ subTopic }) => {
         <p className="mb-0 ">
           Son Gönderen <Link to="">{subTopic.lastMessageSender}</Link>{" "}
         </p>
-        <p className="mb-0 ">{ moment(subTopic.lastMessageDate).startOf('day').fromNow()}</p>
+        <p className="mb-0 ">{ moment(subTopic.lastMessageDate).fromNow()}</p>
       </div>
       <div className="topics col-3 p-1 border">{subTopic.topicCount} konu var</div>
     

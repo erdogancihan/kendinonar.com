@@ -3,15 +3,27 @@ import ForumPanel from "./forumPanel";
 import UserPanel from "./userPanel";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
+import PropTypes from 'prop-types'
+
 
 class AdminPanel extends Component {
+  constructor(props){
+    super(props)
+  }
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  }
+
+  componentDidMount () {
+    const { firestore } = this.context.store     
+  }
+
+
   render() {
-    const { auth, users } = this.props;
+    const { auth } = this.props;
 
     if (!auth.uid) {
-      return <Redirect to="/signin" />;
+     // return <Redirect to="/signin" />;
     }
 
     return (
@@ -29,12 +41,9 @@ class AdminPanel extends Component {
   }
 }
 const mapStateToProps = state => {
+  console.log(state)
   return {
     auth: state.firebase.auth,
-    users: state.firestore.ordered.users
   };
 };
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([{ collection: "users" }])
-)(AdminPanel);
+export default connect(mapStateToProps)(AdminPanel);
