@@ -80,7 +80,7 @@ class ForumDetails extends Component {
 
     return (
       <div className="container">
-        <ForumDetailsHeader topic={topic} />
+        <ForumDetailsHeader topic={topic} auth={auth} />
         {forumDetailsContent}
       </div>
     );

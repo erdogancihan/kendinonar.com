@@ -24,5 +24,5 @@ const store = createStore(
     </Provider>,
     document.getElementById("root")
   );
-  serviceWorker.unregister();
+  serviceWorker.register();
 

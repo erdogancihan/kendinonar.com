@@ -17,7 +17,7 @@ const ForumLevel2Header = ({ topic}) => {
       </div>
       <div className="row forum-level2-header">
         <div className="px-3  h5">
-          <span className="text-white">{topic}</span>
+          <span className="">{topic}</span>
         </div>
       </div>
     </div>

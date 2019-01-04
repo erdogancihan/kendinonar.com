@@ -29,7 +29,7 @@ class Navbar extends Component {
         <div className="navbar-top container">
           <div className="navbar-brand-logo">
             <Link to="/">
-              <img src={Logo} alt="www.kendin.onar" />
+              <img src={Logo} alt="www.kendinonar" />
             </Link>
           </div>
         </div>{" "}

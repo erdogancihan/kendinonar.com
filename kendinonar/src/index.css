@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #676447;
+  background-color: #febf55;
   font-size:14px;
 }
 
@@ -15,7 +15,7 @@ body {
   padding:0;
 }
 .navbar-brand-logo{
-  background-color: #676447;
+  background-color: #febf55;
   height:90px;
 }
 
@@ -29,13 +29,16 @@ color:#212529;
 background-size: cover;
 background-position: center;
 }
+.nav-link{
+  color:#111;
+}
 .container{
   background-color: #EBEBEA;
 }
 
 .forum-header{
-  background-color: #B7AF6F;
-  color:#fff;  
+  background-color: #febf55;
+  color:#333;  
 }
 .logo{
   background-size: cover;
@@ -44,13 +47,13 @@ background-position: center;
 
 }
 .forum-level1-header, .forum-level2-header, .forum-details-header{
-  background-color: #567144;
+  background-color: #febf55;
 }
 .new-comment,.new-topic-button{
-  background-color: #B7AF6F;  
+  background-color: #febf55;  
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
-  color:white;
+  color:#333;
   padding:2px 8px;
   margin:5px;
 }
@@ -62,12 +65,12 @@ background-position: center;
   border-radius:50%;
   width:60px;
   height:60px;
-  background-color: #B7AF6F; 
+  background-color: #febf55; 
   position: relative;
   margin:auto; 
 }
 .avatarTop{
- color:#FFF; 
+ color:#333; 
  font-weight: 600;
  
 }
@@ -75,7 +78,7 @@ background-position: center;
   position: relative;
   padding-top:12px;
   text-align: center;
-  color:#fff;
+  color:#333;
 }
 .user-info p{
   font-size:0.8em;

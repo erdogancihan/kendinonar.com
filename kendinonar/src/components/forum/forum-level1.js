@@ -6,7 +6,7 @@ const ForumLevel1 = ({ forumMain, forumSub }) => {
     <React.Fragment>
       <div className="forum-level1-header border">
         <div className="level-1-title">
-          <h6 className="nav-link text-white" key={forumMain.id}>
+          <h6 className="nav-link " key={forumMain.id}>
             {forumMain.main}
           </h6>
         </div>
