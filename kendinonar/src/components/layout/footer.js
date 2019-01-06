@@ -2,13 +2,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-  <div className="mt-3">
-    <h6 className=" text-center  mt-6">
-      {" "}
+  <footer className="mt-3">
+    <h3>
       Kendinonar.com &copy; 2018
-    </h6>
-    <p className=" text-center  "> Developed by Erdogan Cihan</p>
-    </div>
+    </h3>
+    <p className="text-center"> Developed by Erdogan Cihan</p>
+    </footer>
   );
 };
 export default Footer;

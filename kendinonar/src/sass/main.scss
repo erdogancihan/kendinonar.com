@@ -1,0 +1,384 @@
+@import "reset";
+@import "var";
+@import "mixins";
+@import url("https://fonts.googleapis.com/css?family=Advent+Pro|Josefin+Slab|Rajdhani");
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-size: 18px;
+  font-family: "Rajdhani", sans-serif;
+  //font-family: 'Josefin Slab', serif;
+  //font-family: "Advent Pro", sans-serif;
+  color: $color;
+  background: $bgColor;
+}
+/////////GENERAL LAYOUT///////////////
+.container {
+  position: relative;
+  margin: 0 0.5em;
+  max-width: $lg;
+  @include media($lg, $xxl) {
+    margin: 0 auto;
+  }
+}
+
+.hide {
+  display: none;
+}
+/////////GENERAL STYLES/////////////////////
+section {
+  min-height: 70vh;
+}
+h1 {
+  font-size: 2em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.2em 0.5em;
+}
+h3 {
+  font-size: 1.1em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.2em 0.5em;
+}
+
+p {
+  padding: 0.4em 0.5em;
+  text-align: left;
+  line-height: 1.2em;
+}
+
+a {
+  color: $color;
+  text-decoration: none;
+  &:hover {
+    color: $color-light;
+  }
+}
+ul {
+  list-style: none;
+}
+li {
+  text-align: center;
+  padding: 0.5em 0.5em;
+}
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+
+  tr:nth-child(even) {
+    background-color: $navbgColor;
+  }
+  td,
+  th {
+    text-align: center;
+    padding: 0.3em 0.2em;
+    font-size: 0.7em;
+    border-bottom: 1px solid $navbgColor;
+  }
+  @include media($lg, $xxl) {
+    th {
+      font-size: 1em;
+    }
+  }
+}
+
+.light-color {
+  color: $color-light;
+}
+.dark-color {
+  color: $color-dark;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid $navbgColor;
+  margin: 1em 0.5em 0.5em 0.5em;
+  padding: 0.5em 1em;
+  color: $navbgColor;
+  border-radius: 15px;
+  font-weight: 600;
+  &:hover {
+    color: $bgColor;
+    background-color: $navbgColor;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  padding: 5%;
+}
+
+.avatar {
+  display: none;
+}
+//////////////////////NAVBAR/////////////////
+nav {
+  background-color: $navbgColor;
+  a {
+    color: $navColor;
+    font-weight: 600;
+    &:hover {
+      color: $navColor-hover;
+    }
+  }
+
+  .brand {
+    display: block;
+    padding: 0;
+    text-transform: uppercase;
+    height: 55px;
+    //border: 1px solid red;
+  }
+  ul {
+    width: 100%;
+  }
+  ul:before {
+    content: "|||";
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    color: $navColor;
+    font-size: 2em;
+    font-weight: 600;
+    transform: rotate(90deg);
+    cursor: pointer;
+  }
+
+  li {
+    display: none;
+    text-align: left;
+    padding: 1em 0.5em;
+  }
+
+  @include media($md, $xxl) {
+    header {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      justify-content: space-between;
+      ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        li {
+          display: inherit;
+          text-align: center;
+        }
+      }
+      ul:before {
+        display: none;
+      }
+    }
+  }
+}
+.show {
+  display: inherit;
+}
+
+///////  FOOTER  //////@at-root
+footer {
+  color: $navbgColor;
+  font-weight: 600;
+  border-radius: 5px;
+  margin: 1em auto;
+}
+
+//////// FORUM  ////////@at-root
+
+@mixin header {
+  background-color: $navbgColor;
+  color: $navColor;
+  font-weight: 600;
+  border-radius: 5px;
+}
+.forum-header {
+  @include header;
+}
+.forum-title {
+  @include header;
+}
+
+.forum-content {
+  border: 1px solid $navbgColor;
+  border-radius: 5px;
+  h3 {
+    text-align: left;
+  }
+  p {
+    font-size: 0.8em;
+  }
+}
+
+#forum-level1 {
+  .forum-header {
+    @include forum-layout(5fr 3fr 3fr);
+  }
+
+  .forum-row {
+    @include forum-layout(5fr 3fr 3fr);
+  }
+
+  @include media($md, $xxl) {
+    .forum-header {
+      @include forum-layout(1fr 4fr 3fr 3fr);
+    }
+
+    .forum-row {
+      @include forum-layout(1fr 4fr 3fr 3fr);
+    }
+    .avatar {
+      display: inherit;
+    }
+    .hide {
+      display: inherit;
+    }
+  }
+}
+
+#forum-level2 {
+  .forum-header {
+    @include forum-layout(4fr 3fr 3fr);
+  }
+
+  .forum-row {
+    @include forum-layout(4fr 3fr 3fr);
+  }
+
+  @include media($md, $xxl) {
+    .forum-header {
+      @include forum-layout(1fr 4fr 3fr 3fr);
+    }
+
+    .forum-row {
+      @include forum-layout(1fr 4fr 3fr 3fr);
+    }
+    .avatar {
+      display: inherit;
+    }
+    .hide {
+      display: inherit;
+    }
+  }
+}
+#forum-details {
+  .forum-header {
+    @include forum-layout(1fr 1fr 1fr 1fr);
+    justify-content: space-between;
+    a {
+      color: $navColor;
+    }
+  }
+
+  .forum-row {
+    @include forum-layout(2fr 6fr);
+  }
+
+  .initials {
+    border: 1px solid $navbgColor;
+    border-radius: 50%;
+    margin: auto;
+    width: 60px;
+    height: 60px;
+    padding-top: 15px;
+    text-align: center;
+    color: $navbgColor;
+    font-size: 30px;
+    font-weight: 600;
+  }
+  @include media($md, $xxl) {
+    .avatar {
+      display: inherit;
+    }
+  }
+}
+/////////  FORM  /////////@include
+.form-group {
+  @include forum-layout(1fr 1fr);
+  max-width: $sm * 4/5;
+
+  margin-bottom: 1em;
+  font-size: 1.1em;
+  label {
+    padding: 0.5em 1em;
+  }
+  input {
+    padding: 0.5em 1em;
+    border-radius: 15px;
+    outline: none;
+  }
+}
+form {
+  margin-top: 2em;
+  .btn {
+    font-size: 1em;
+    width: $sm * 3/5;
+    display: block;
+    margin: auto;
+    background-color: $bgColor;
+  }
+  @include media($md, $xxl) {
+    .btn {
+      width: $sm/2;
+      display: block;
+    }
+  }
+}
+//// ADD TOPIC  //////@include
+.ckeditor {
+  margin: 1em auto;
+  @include media($md, $xxl) {
+    width: $md * 2/3;
+  }
+}
+
+////// ADMIN PANEL //////
+.admin-container-grid {
+  @include media($md, $xxl) {
+    @include forum-layout(1fr 1fr);
+    grid-gap: 1em;
+  }
+}
+
+.forum-admin {
+  @include forum-layout(1fr 1fr);
+  align-items: center;
+  justify-items: end;
+  //border: 1px solid $navbgColor;
+  padding: 0;
+  font-weight: 600;
+
+  h3 {
+    justify-self: self-start;
+  }
+  p {
+    justify-self: self-start;
+    font-weight: 400;
+    font-size: 0.8em;
+  }
+}
+
+.admin-container {
+  margin-top: 1em;
+  border: 1px solid $navbgColor;
+  padding: 0;
+  ul {
+    margin-left: 1.8em;
+  }
+  form {
+    margin-top: 1em;
+  }
+  .btn {
+    margin-bottom: 0.5em;
+  }
+}
+.btn-admin {
+  width: 50px;
+  background-color: $bgColor;
+}

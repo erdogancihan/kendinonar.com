@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import moment from 'moment';
+import moment from "moment";
 import "moment/locale/tr";
 
 const ForumDetailsContent = ({
@@ -19,71 +19,61 @@ const ForumDetailsContent = ({
   const MessageActions = () => {
     if (messageSender.id === auth.uid) {
       return (
-        <div className="col-4">
-          <div className="row">
-          <div className="col-6">
-            <Link
-              to={"/editmessage/" + message.id}
-              className={"new-comment p-0"}
-             
-            >
-              Değiştir
-            </Link>
+        <React-Fragment>
+          <div className="forum-header">
+            <p>{moment(message.messageDate).format("ll")}</p>
+            <p>
+              <Link to={"/editmessage/" + message.id}>Değiştir</Link>
+            </p>
+            <p>
+              <Link to="" id={message.id} onClick={deleteMessage}>
+                Sil
+              </Link>
+            </p>
+
+            <p>{"#" + orderNumber}</p>
           </div>
-          <div className="col-6">
-            <Link
-              to=""
-              id={message.id}
-              className="new-comment p-0 "
-              onClick={deleteMessage}
-            >
-              Sil
-            </Link>
-          </div>
-          </div>
-        </div>
+        </React-Fragment>
       );
-    }else{
-      return <div className="col-4"/>
+    } else {
+      return (
+        <React-Fragment>
+          <div className="forum-header">
+            <p>{moment(message.messageDate).format("ll")}</p>
+            <p>{"#" + orderNumber}</p>
+          </div>
+        </React-Fragment>
+      );
     }
   };
 
   return (
     <React.Fragment>
-      <div className="container">
-        <div className="row forum-header">
-          <div className="col-4">{moment(message.messageDate).format('ll')}</div>
-          <div className="col-3 p-0 ">
-            {" "}
-            <Link to={"/addmessage/" + topic} className="new-comment p-0">
-              Yeni Yorum
-            </Link>
+      <MessageActions/>
+      <div className="forum-row">
+        <div className="forum-content">
+          <p>
+            <Link to="/user/:id">{message.messageSender}</Link>
+            <span className="dark-color"> {messageSender.privilege}</span>
+          </p>
+
+          <h3 className="avatar initials">
+            {message.messageSender[0] + message.messageSender[1]}
+          </h3>
+
+          <div className="user-info">
+            <p>
+              {"Giriş tarihi: " +
+                moment(messageSender.signUpDate).format("DD.MM.YYYY")}
+            </p>
+            <p>{"Şehir: " + messageSender.city}</p>
+            <p>{"Mesajlar: " + messageSender.messageCount}</p>
           </div>
-          <MessageActions/>
-          <div className="col-1 p-0">{'#'+orderNumber}</div>
         </div>
-        <div className="row forum-details">
-          <div className="col-3 col-lg-2 border p-1">
-            <div>
-              <Link to="/user/:id">{message.messageSender}</Link>
-              <span className="text-right"> {messageSender.privilege}</span>
-            </div>
-            <div className="avatar">
-              <h3 className="text-uppercase">
-                {message.messageSender[0] + message.messageSender[1]}
-              </h3>
-            </div>
-            <div className="user-info">
-              <p>{"Giriş tarihi: " + moment(messageSender.signUpDate).format('DD.MM.YYYY')}</p>
-              <p>{"Şehir: " + messageSender.city}</p>
-              <p>{"Mesajlar: " + messageSender.messageCount}</p>
-            </div>
-          </div>
-          <div
-            className="forum col-9 col-lg-10 border p-2  "
-            dangerouslySetInnerHTML={{ __html: message.messageContent }}
-          />
-        </div>
+        <div
+          className="forum-content"
+          dangerouslySetInnerHTML={{ __html: message.messageContent }}
+        />
       </div>
     </React.Fragment>
   );

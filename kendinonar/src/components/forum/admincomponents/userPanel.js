@@ -61,7 +61,6 @@ class UserPanel extends Component {
           <tr key={user.id}>
             <td>{user.userName}</td>
             <td>{user.email}</td>
-            <td>{user.city}</td>
             <td>{user.messageCount}</td>
             <td>{moment(user.signUpDate).format("MMM Do YY")}</td>
             <td style={{ width: "30%" }}>
@@ -90,16 +89,15 @@ class UserPanel extends Component {
       });
 
     return (
-      <React.Fragment>
-        <h5 className="text-center">Kullanıcılar</h5>
-        <div className="card ">
-          <div className="table-responsive-lg">
-            <table className="table table-sm   table-hover">
+      <section >
+        <h1 >Kullanıcılar</h1>
+ 
+        
+            <table className="admin-container">
               <thead>
                 <tr>
                   <th>User Name</th>
                   <th>Email</th>
-                  <th>City</th>
                   <th>Message Count</th>
                   <th>SignUp Date</th>
                   <th>Privilege</th>
@@ -108,9 +106,9 @@ class UserPanel extends Component {
               </thead>
               <tbody>{user}</tbody>
             </table>
-          </div>
-        </div>
-      </React.Fragment>
+      
+      
+      </section>
     );
   }
 }

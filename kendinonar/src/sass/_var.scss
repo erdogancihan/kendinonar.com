@@ -1,0 +1,28 @@
+/*////////////////////// Colors ////////////////*/
+
+$bgColor:#2d362f;
+$navbgColor:#eca50b;
+$navColor:#2d362f;
+$navColor-hover:darken($navColor, 30);
+$color:#edd;
+$color-light:lighten(#eee,60);
+$color-dark:darken(#eee,40);
+$skillColor:#eee;
+$showcaseside:#e73232;
+
+
+/* ////////////// Break Points ///////////////*/
+//small tablets and large smartphones(landscape view)
+$sm:576px;
+
+//small tablets(portrait view)
+$md:768px;
+
+//Tablets and small desktops
+$lg:992px;
+
+//Large tablets and desktops
+$xl:1200px;
+
+//greaer than any size
+$xxl:40000px;

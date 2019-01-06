@@ -79,10 +79,10 @@ class ForumDetails extends Component {
       });
 
     return (
-      <div className="container">
+      <section id="forum-details" className="container">
         <ForumDetailsHeader topic={topic} auth={auth} />
         {forumDetailsContent}
-      </div>
+      </section>
     );
   }
 }

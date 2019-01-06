@@ -7,7 +7,8 @@ class SignIn extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      error:null
     };
   }
   static contextTypes = {
@@ -19,6 +20,12 @@ class SignIn extends Component {
     firestore.get("users");
     firestore.onSnapshot({ collection: "users" });
   }
+  componentWillReceiveProps(){
+    if (this.props.auth.uid){
+     
+      this.props.history.push("/");
+    } 
+  }
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
@@ -29,61 +36,48 @@ class SignIn extends Component {
     e.preventDefault();
     this.context.store.firebase
       .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password);
-    this.props.history.goBack();
+      .signInWithEmailAndPassword(this.state.email, this.state.password).catch(error=>{
+        this.setState({error:error.message});
+      });
+      
+    if (this.props.auth.uid){
+     
+      this.props.history.push("/");
+    } 
   };
 
   render() {
     const { authError } = this.props;
     return (
-      <div className="container">
-        <div className="row ">
-          <div className="offset-md-4 col-md-4 border">
-            <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <label className="h5 mt-3" htmlFor="InputEmail1">
-                  Email Adresi
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  aria-describedby="emailHelp"
-                  placeholder="Email Adresi Giriniz"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label className="h5" htmlFor="InputPassword1">
-                  Şifre
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Şifrenizi Giriniz"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="Check1"
-                  onChange={this.handleChange}
-                />
-                <label className="form-check-label" htmlFor="Check1">
-                  Beni Hatırla
-                </label>
-              </div>
-              <button className="btn btn-secondary m-3">Giriş Yap</button>
-              <div className="text-center text-danger">
-                {authError ? <p> {authError}</p> : null}
-              </div>
-            </form>
+      <section className="container">
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="InputEmail1">Email Adresi</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="Email Adresi Giriniz"
+              onChange={this.handleChange}
+            />
           </div>
-        </div>
-      </div>
+          <div className="form-group">
+            <label htmlFor="InputPassword1">Şifre</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="Şifrenizi Giriniz"
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <button className="btn ">Giriş Yap</button>
+
+          {this.state.error!==null? <p className="text-center"> {this.state.error}</p> : null}
+        </form>
+      </section>
     );
   }
 }
@@ -95,9 +89,9 @@ const mapStateToProps = state => {
     const users = state.firestore.data.users;
     user = users ? users[userId] : null;
   }
-  // console.log(state);
+  console.log(state);
   return {
-    authError: state.firebase.auth.authError,
+    authError: state.firebase.authError,
     auth: state.firebase.auth,
     user: user
   };

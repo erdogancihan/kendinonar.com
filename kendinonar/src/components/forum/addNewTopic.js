@@ -179,34 +179,37 @@ export class AddNewTopic extends Component {
       return <Redirect to="/signin" />;
     }
     return (
-      <div className="container">
+      <section className="container">
+      <h1>YENİ KONU AÇIN</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="title">Konu Adı</label>
+            <label htmlFor="topicTitle">Konu Adı</label>
             <input
               type="text"
-              className="form-control"
               id="topicTitle"
               aria-describedby="title"
-              placeholder="Başlık Giriniz"
+              placeholder="Konu Adı Giriniz"
               onChange={this.handleChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="title">Mesaj</label>
-            <CKEditor
-              activeClass="p10"
-              content={this.state.messageContent}
-              events={{
-                blur: this.onBlur,
-                afterPaste: this.afterPaste,
-                change: this.onChange
-              }}
-            />
+
+          <h1>Mesaj</h1>
+          <div className="ckeditor">
+          <CKEditor
+            activeClass="p10"
+            content={this.state.messageContent}
+            events={{
+              blur: this.onBlur,
+              afterPaste: this.afterPaste,
+              change: this.onChange
+            }}
+          />
           </div>
-          <button className="btn btn-secondary m-3">Kaydet</button>
+         
+
+          <button className="btn ">Kaydet</button>
         </form>
-      </div>
+      </section>
     );
   }
 }

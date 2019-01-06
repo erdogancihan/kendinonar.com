@@ -30,18 +30,16 @@ class ForumLevel2 extends Component {
       });
     // console.log(this.props)
     return (
-      <div className=" container">
+      <section id="forum-level2" className=" container">
         <ForumLevel2Header topic={this.props.match.params.id} />
-        <div className="forum-header ">
-          <div className="row">
-            <div className="logo col-1 p-1" />
-            <div className="forum col-4 p-1">Konu/Konu Yazarı</div>
-            <div className="last-message col-4 p-1">Son Mesaj</div>
-            <div className="topics col-3 p-1">Mesajlar</div>
-          </div>
-        </div>
-        <div className="forum-level2 ">{Forumlevel2content}</div>
-      </div>
+        <ul className="forum-header ">
+          <li className="hide"/>
+          <li>Konu/Konu Yazarı</li>
+          <li>Son Mesaj</li>
+          <li>Mesajlar</li>
+        </ul>
+        <div>{Forumlevel2content}</div>
+      </section>
     );
   }
 }

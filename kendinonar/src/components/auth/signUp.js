@@ -35,7 +35,7 @@ class signUp extends Component {
   //set state from form
   handleChange = e => {
     this.setState({
-      user:{...this.state.user, [e.target.id]: e.target.value}
+      user: { ...this.state.user, [e.target.id]: e.target.value }
     });
   };
   //add new user
@@ -44,11 +44,14 @@ class signUp extends Component {
     if (this.state.password === this.state.password1) {
       this.context.store.firebase
         .auth()
-        .createUserWithEmailAndPassword(this.state.user.email, this.state.user.password)
+        .createUserWithEmailAndPassword(
+          this.state.user.email,
+          this.state.user.password
+        )
         .then(response => {
-          console.log(response.user.uid)
+          console.log(response.user.uid);
 
-         this.context.store.firestore.set(
+          this.context.store.firestore.set(
             { collection: "users", doc: response.user.uid },
             {
               userName: this.state.user.userName,
@@ -56,7 +59,7 @@ class signUp extends Component {
               privilege: "acemi",
               signUpDate: new Date().toISOString(),
               messageCount: 0,
-              email:this.state.user.email
+              email: this.state.user.email
             }
           );
         })
@@ -84,90 +87,71 @@ class signUp extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="offset-md-4 col-md-4 border">
-            <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <label className="h6 mt-3" htmlFor="InputEmail1">
-                  Email adresi
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  aria-describedby="emailHelp"
-                  placeholder="Email Adresi Giriniz"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="h6 " htmlFor="InputPassword">
-                  Şifre
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Şifrenizi belirleyiniz"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="h6 " htmlFor="InputPassword1">
-                  Şifre Tekrar
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password1"
-                  placeholder="Şifrenizi tekrar giriniz"
-                  value={this.state.password1}
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="h6 " htmlFor="firstName">
-                  Kullanıcı Adınız
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="userName"
-                  aria-describedby="firstName"
-                  placeholder="Adınız"
-                  value={this.state.userName}
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="h6 " htmlFor="city">
-                  Şehir
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="city"
-                  aria-describedby="city"
-                  placeholder="Şehir"
-                  value={this.state.city}
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-
-              <button className="btn btn-secondary m-3">Üye Ol</button>
-              <div>{this.state.message}</div>
-            </form>
+      <section className="container">
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="InputEmail1">Email adresi</label>
+            <input
+              type="email"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="Email Adresi Giriniz"
+              onChange={this.handleChange}
+              required
+            />
           </div>
-        </div>
-      </div>
+          <div className="form-group">
+            <label htmlFor="InputPassword">Şifre</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Şifrenizi belirleyiniz"
+              value={this.state.password}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="InputPassword1">Şifre Tekrar</label>
+            <input
+              type="password"
+              id="password1"
+              placeholder="Şifrenizi tekrar giriniz"
+              value={this.state.password1}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="firstName">Kullanıcı Adınız</label>
+            <input
+              type="text"
+              id="userName"
+              aria-describedby="firstName"
+              placeholder="Adınız"
+              value={this.state.userName}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="city">Şehir</label>
+            <input
+              type="text"
+              id="city"
+              aria-describedby="city"
+              placeholder="Şehir"
+              value={this.state.city}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+
+          <button className="btn">Üye Ol</button>
+          <p>{this.state.message}</p>
+        </form>
+      </section>
     );
   }
 }

@@ -17,11 +17,12 @@ export class EditMessage extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentDidMount(){
-    console.log(this.props.messages[this.props.match.params.id])
+  componentDidMount() {
+  
     this.setState({
       ...this.state,
-      messageContent: this.props.messages[this.props.match.params.id].messageContent
+      messageContent: this.props.messages[this.props.match.params.id]
+        .messageContent
     });
   }
 
@@ -77,17 +78,15 @@ export class EditMessage extends Component {
   };
 
   render() {
-
-    console.log(this.props.message)
+    console.log(this.props.message);
     if (!this.props.auth.uid) {
       return <Redirect to="/signin" />;
     }
     return (
-      <div className="container">
+      <section className="container">
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="messageContent">Yorumu Düzenle</label>
-
+          <h1>Yorumu Düzenle</h1>
+          <div className="ckeditor">
             <CKEditor
               activeClass="p10"
               content={this.state.messageContent}
@@ -98,9 +97,9 @@ export class EditMessage extends Component {
               }}
             />
           </div>
-          <button className="btn btn-secondary m-3">Kaydet</button>
+          <button className="btn ">Kaydet</button>
         </form>
-      </div>
+      </section>
     );
   }
 }

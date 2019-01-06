@@ -7,35 +7,27 @@ import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 
 class Forum extends Component {
- 
   render() {
     const { forumMain, forumSub } = this.props;
     return (
-      <React.Fragment>
-        <div className="container">
-          <div className="forum-level1">
-            <Welcome />
-          </div>
-          <div className="forum-header">
-            <div className="row no-gutters">
-              <div className="col-1" />
-              <div className="forum-header1 col-5  p-1">Forum</div>
-              <div className="forum-header1 col-3  p-1">Son Mesaj</div>
-              <div className="forum-header1 col-3 p-1">Konular</div>
-            </div>
-          </div>
-          {forumMain &&
-            forumMain.map(mainTopic => {
-              return (
-                <ForumLevel1
-                  key={mainTopic.id}
-                  forumMain={mainTopic}
-                  forumSub={forumSub}
-                />
-              );
-            })}
-        </div>
-      </React.Fragment>
+      <section id="forum-level1" className="container">
+        <Welcome />
+        <ul className="forum-header">
+          <li>Forum</li>
+          <li>Son Mesaj</li>
+          <li>Konular</li>
+        </ul> 
+        {forumMain &&
+          forumMain.map(mainTopic => {
+            return (
+              <ForumLevel1
+                key={mainTopic.id}
+                forumMain={mainTopic}
+                forumSub={forumSub}
+              />
+            );
+          })}
+      </section>
     );
   }
 }

@@ -1,0 +1,14 @@
+/*Media Quaries*/
+/// @param {string} $min min-width, $max maxwidth.
+@mixin media($min,$max) {
+  @media screen and (min-width:$min) and (max-width:$max)  {
+    @content;
+  }
+}
+
+@mixin forum-layout($columns...){
+  display: grid;
+  grid-template-columns:$columns;
+  margin:0.2em auto;
+ 
+}

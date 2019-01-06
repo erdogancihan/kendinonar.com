@@ -7,6 +7,12 @@ import Logo from "../../img/kendinonar-logo.jpg";
 import { connect } from "react-redux";
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      navtoggle: false
+    };
+  }
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -15,51 +21,48 @@ class Navbar extends Component {
     const { firestore } = this.context.store;
     firestore.get("users");
     firestore.onSnapshot({ collection: "users" });
-    
   }
   handleSignOut = () => {
-    console.log("signout")
+    console.log("signout");
     this.context.store.firebase.auth().signOut();
+  };
+  toggleNav = () => {
+    //console.log(window.visualViewport.width);
+    if(window.visualViewport.width < 768){
+      this.setState(
+        {
+          navtoggle: !this.state.navtoggle
+        },
+        () => {
+          const navlist = document.getElementById("nav-list").childNodes;
+          if (this.state.navtoggle) {
+            navlist.forEach(element => element.classList.add("show"));
+          } else {
+            navlist.forEach(element => element.classList.remove("show"));
+          }
+        }
+      );
+    }
+    
   };
 
   render() {
     const { auth, user } = this.props;
     return (
-      <React.Fragment>
-        <div className="navbar-top container">
-          <div className="navbar-brand-logo">
-            <Link to="/">
-              <img src={Logo} alt="www.kendinonar" />
-            </Link>
-          </div>
-        </div>{" "}
-        <div className="container p-0  ">
-          <nav className="navbar navbar-expand-sm navbar-dark bg-dark d-flex">
-            <Link to="" className="navbar-brand">
-              Kendin Onar
-            </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div
-              className="collapse navbar-collapse justify-content-end"
-              id="navbarNav"
-            >
-              <ul className="navbar-nav ">
-                {auth.uid ? <SignedInLinks user={user} signOut={this.handleSignOut}  /> : <SignedOutLinks />}
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </React.Fragment>
+      <nav className="container">
+        <header>
+          <Link to="/" onClick={this.toggleNav}>
+            <img className="brand" src={Logo} alt="www.kendinonar" />
+          </Link>
+          <ul id="nav-list" onClick={this.toggleNav}>
+            {auth.uid ? (
+              <SignedInLinks user={user} signOut={this.handleSignOut} toggleNav={this.toggleNav} />
+            ) : (
+              <SignedOutLinks toggleNav={this.toggleNav} />
+            )}
+          </ul>
+        </header>
+      </nav>
     );
   }
 }

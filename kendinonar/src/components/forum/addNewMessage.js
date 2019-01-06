@@ -18,7 +18,7 @@ export class AddNewMessage extends Component {
       lastMessageSender: "",
       sub: "",
       subMessageCount: 0,
-      userMessageCount: "",
+      userMessageCount: ""
     };
     this.updateContent = this.updateContent.bind(this);
   }
@@ -28,7 +28,7 @@ export class AddNewMessage extends Component {
 
   componentDidMount() {
     const { firestore } = this.context.store;
-    console.log(this.props)
+    console.log(this.props);
     firestore.get({
       collection: "topics",
       where: ["topicTitle", "==", this.props.match.params.id],
@@ -46,7 +46,7 @@ export class AddNewMessage extends Component {
     });
 
     firestore.get({
-      collection: "subTopic",    
+      collection: "subTopic",
       storeAs: "subTopicsFiltered"
     });
   }
@@ -94,7 +94,7 @@ export class AddNewMessage extends Component {
       lastMessageTitle: this.state.topicTitle,
       messageCount: this.state.subMessageCount
     };
-    console.log(subTopic)
+    console.log(subTopic);
     this.context.store.firestore.update(
       { collection: "subTopic", doc: this.state.id },
       subTopic
@@ -126,7 +126,7 @@ export class AddNewMessage extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    let subTopicData={};
+    let subTopicData = {};
     this.props.subTopic &&
       this.props.subTopic.map(subtopic => {
         if (subtopic.sub === this.props.topics[0].sub) {
@@ -137,7 +137,7 @@ export class AddNewMessage extends Component {
         }
       });
 
-  console.log(subTopicData)
+    console.log(subTopicData);
     this.setState(
       {
         ...this.state,
@@ -151,7 +151,6 @@ export class AddNewMessage extends Component {
         id: subTopicData.id,
         subMessageCount: parseInt(subTopicData.messageCount + 1),
         userMessageCount: parseInt(this.props.user.messageCount + 1)
-        
       },
       () => {
         console.log(this.state);
@@ -169,11 +168,10 @@ export class AddNewMessage extends Component {
       return <Redirect to="/signin" />;
     }
     return (
-      <div className="container">
+      <section className="container">
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="messageContent">Yeni Yorum</label>
-
+          <h1>Yeni Yorum</h1>
+          <div className="ckeditor">
             <CKEditor
               activeClass="p10"
               content={this.state.messageContent}
@@ -184,9 +182,9 @@ export class AddNewMessage extends Component {
               }}
             />
           </div>
-          <button className="btn btn-secondary m-3">Kaydet</button>
+          <button className="btn">Kaydet</button>
         </form>
-      </div>
+      </section>
     );
   }
 }
